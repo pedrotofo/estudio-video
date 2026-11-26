@@ -138,7 +138,11 @@ motion**:
 3. **Regras de bom gosto** (vêm dos guias aprovados do Riomar e da Diamantes):
    - cada motion entra na palavra exata e sai antes do próximo; uns 6 a 8 motions por 40 s;
    - deixe **respiros** (pergunta para a câmera, stop motion, momento de expressão) sem nada;
-   - nunca em cima do rosto: terço de cima ou faixa de 60–82% da altura, conforme o plano;
+   - nunca em cima do rosto, nem quando a pessoa anda ou chega perto: terço de cima ou faixa de
+     60–82% da altura, conforme o plano;
+   - **respiro nas bordas**: em vertical, 100 px nas laterais, 180 px em cima e 380 px embaixo
+     (contando brilho e sombra); medido com `/ilustrar-fala` › `scripts/margens.py`;
+   - encerramento termina montado e parado, sem fusão com arte de layout diferente;
    - sem caixa/card grande atrás do texto; pílulas pequenas, letreiros e ícones;
    - formatos variados (logo se montando, contador, calendário, lista, seta para o objeto real,
      balão), sem repetir a mesma animação o vídeo todo;
