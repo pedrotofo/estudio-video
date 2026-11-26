@@ -20,6 +20,7 @@ Este é o mapa das skills. Escolha pelo pedido; não rode tudo sempre.
 |---|---|---|
 | 1. Decupar: transcrição com timecode, melhores falas, o que ilustrar | `/decupagem` | `decup/decupagem.md`, `.json`, `.srt` |
 | 2. Tirar silêncios, "éé", gaguejos e retakes | `/video-editing-skill` | `edited/manifest.json` (trechos mantidos) e um MP4 de prévia |
+| 2b. Edição por conversa a partir de vários brutos (montagem, cor, legenda) | `/video-use` (transcreve no ElevenLabs: veja as regras) | `edit/` com o corte e as transcrições |
 | 3. Ilustrar a fala (mapa, número, lista, lugar, citação) | `/ilustrar-fala` | `motions/*.mov` (ProRes 4444 com alfa) e `insertos.json` |
 | 4. Levar para o Premiere como timeline editável | `/premiere-xml` | `premiere/<nome>.xml` |
 | 5. Versão vertical para Reels/TikTok | `/reel-export` | MP4 1080×1920 |
@@ -48,13 +49,20 @@ então o MP4 da `video-editing-skill` é só prévia; o que vale é o `manifest.
 | Apresentar um projeto numa janela 3D escura | `/interface-escura-3d` |
 | Newsletter: promo e capa animada | `/newsletter-promo`, `/loop-cover` |
 | Comparar 3 IAs no mesmo pedido | `/model-showdown` |
-| Projeto de vídeo em React, legendas, mapas Mapbox | `/remotion-best-practices` (e as outras `remotion-*`) |
+| Gosto e acabamento do motion: timing, easing, coreografia | `/motion-design` (princípios), `/motion-doctrine` e `/cut-the-curve` (continuidade e transições do time do HyperFrames), `/seam-craft` (cortes sem flash) |
+| Escrever a animação em GSAP (o motor do HyperFrames) | `/gsap-core`, `/gsap-timeline`, `/gsap-plugins`, `/gsap-utils`, `/gsap-performance` |
+| Estética de páginas e sites (landing page do cliente, portfólio) | `/design-taste-frontend` |
 | Cena 3D realista ou filme curto no Blender | `/blender-film`, `/blender-car-film`, `/blender-forest` (precisa do Blender instalado) |
 | Escrever o pedido de um motion | `/motion-brief-writer` (para construir aqui no Claude Code); `/reference-to-motion` (a partir de um vídeo de referência) |
 | Prompt para IA que gera vídeo (MiniMax e parecidos) | `prompts-de-motion` (está na sua conta do Claude) |
 
-HyperFrames ou Remotion? **HyperFrames** é o padrão: as skills de motion daqui exportam por ele, e
-ele gera `.mov` com transparência. **Remotion** só quando a pessoa pedir ou o projeto já for React.
+**HyperFrames** é o motor de todo motion daqui: gera `.mov` com transparência para o Premiere, as
+skills de motion exportam por ele e ele converte projetos Remotion (`npx hyperframes` + skill
+`remotion-to-hyperframes` da biblioteca dele). O Remotion não faz parte do Estúdio.
+
+Para um motion com acabamento de profissional: antes de animar, leia `/motion-design` (o porquê de
+cada easing e tempo) e `/motion-doctrine` (continuidade entre cenas); depois do `check`, revise o
+movimento quadro a quadro com `npx hyperframes snapshot`.
 
 ## Pasta de trabalho
 
@@ -71,8 +79,14 @@ Um projeto por vídeo, fora de qualquer repositório git:
 
 ## Regras do Estúdio
 
-- **Material de cliente não sai do computador.** Transcrição local (faster-whisper). Não suba
-  vídeo, áudio nem transcrição para serviços externos sem a pessoa pedir.
+- **Material de cliente não sai do computador.** Transcrição local (faster-whisper) por padrão.
+  O `/video-use` e o ElevenLabs **enviam o áudio para a ElevenLabs**: use só quando a pessoa pedir
+  para aquele material ("pode usar o ElevenLabs"). Ele erra menos que o Whisper local (num teste,
+  acertou "três estados" onde o Whisper ouviu "33"), então é uma boa segunda opinião quando a
+  decupagem marca muitos `[?]`.
+- **ElevenLabs na nuvem:** a chave está guardada no ambiente e é injetada pela rede. O `video-use`
+  só pede que a variável exista: rode com `ELEVENLABS_API_KEY=proxy-injected`. No computador, a
+  pessoa põe a chave real em `~/.claude/skills/video-use/.env` (o instalador preserva esse arquivo).
 - **HyperFrames sem telemetria.** Rode os comandos com `HYPERFRAMES_NO_TELEMETRY=1` e pule as
   "usage notes" e `npx hyperframes events` que as skills dele pedem: o Estúdio deixa isso
   desligado para proteger o material de cliente. Só ligue se a pessoa pedir.

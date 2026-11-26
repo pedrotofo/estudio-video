@@ -22,8 +22,13 @@ qualquer projeto, no computador ou na nuvem.
 `blender-forest`.
 
 **De terceiros** (`terceiros.txt`, cada uma presa a um commit conferido):
-HyperFrames (`hyperframes`, `hyperframes-cli`, `hyperframes-registry`, `media-use`),
-Remotion (14 skills `remotion-*`) e `video-editing-skill` (silêncios, "éé", retakes, legenda).
+- HyperFrames: `hyperframes`, `hyperframes-cli`, `hyperframes-registry`, `media-use`, e as regras
+  de motion do time deles (`motion-doctrine`, `cut-the-curve`, `seam-craft`)
+- GSAP oficial: `gsap-core`, `gsap-timeline`, `gsap-plugins`, `gsap-utils`, `gsap-performance`
+- `motion-design` (LottieFiles): princípios de timing, easing e coreografia
+- `design-taste-frontend` (Taste Skill): estética para páginas e sites
+- `video-editing-skill`: silêncios, "éé", retakes, legenda
+- `video-use`: edição por conversa com transcrição no ElevenLabs (envia o áudio para lá)
 
 ## Como instalar
 
@@ -42,8 +47,9 @@ cd estudio-video
 bash instalar.sh          # no Windows: rode no Git Bash
 ```
 
-Instala em `~/.claude/skills` (vale para todos os projetos) e instala faster-whisper, HyperFrames
-e OpenTimelineIO. Precisa de Python 3, Node.js 22+ e ffmpeg. Para atualizar depois:
+Instala em `~/.claude/skills` (vale para todos os projetos) e instala faster-whisper, PyTorch
+(tempo preciso por palavra), HyperFrames e OpenTimelineIO. Para o `video-use`, ponha sua chave do
+ElevenLabs em `~/.claude/skills/video-use/.env` (`ELEVENLABS_API_KEY=...`). Precisa de Python 3, Node.js 22+ e ffmpeg. Para atualizar depois:
 `git pull && bash instalar.sh`.
 
 ## Como mudar uma skill
@@ -54,6 +60,6 @@ instalação.
 
 ## Privacidade
 
-- A transcrição é local. Nenhum vídeo de cliente sai do computador.
+- A transcrição padrão é local. Só o `video-use` (ElevenLabs) envia áudio, e só quando você pedir.
 - O HyperFrames roda com `HYPERFRAMES_NO_TELEMETRY=1`.
 - Material de cliente (bruto, `.mov`, decupagens) nunca entra neste repositório (`.gitignore`).

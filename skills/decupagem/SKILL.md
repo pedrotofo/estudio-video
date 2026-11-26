@@ -44,6 +44,15 @@ python3 <esta-skill>/scripts/transcrever.py VIDEO --saida decup/ --termos "Nome,
 Gera `transcricao.json` (palavras com tempo e confiança), `transcricao.txt`, `pausas.json` e
 `legenda.srt`. Vários takes: rode uma vez por arquivo, cada um na sua pasta `decup/<take>/`.
 
+Com `torch` e `torchaudio` instalados (o `instalar.sh` instala), o tempo de cada palavra é
+refinado por alinhamento forçado: num teste com tempos conhecidos, erro médio de 18 ms (menos de
+1 quadro) contra 125 ms do Whisper puro. É isso que faz o motion acender na palavra. Na primeira
+vez ele baixa um modelo de 1,2 GB. `--rapido` pula esse passo.
+
+Muitos `[?]` ou nomes e números errados: ofereça transcrever de novo com o ElevenLabs Scribe
+(`/video-use`, `helpers/transcribe.py`), que erra menos, **avisando que o áudio vai para a
+ElevenLabs**. Só com o sim da pessoa.
+
 Se faltar `faster-whisper`: `pip install faster-whisper "av<16"` (a versão 16+ do PyAV quebra o
 faster-whisper 1.2). Separar falantes pede `pip install pyannote.audio` e `HF_TOKEN`; sem isso,
 siga sem separar e diga isso uma vez.

@@ -1,16 +1,31 @@
 # Skills de terceiros, presas no commit que foi conferido (código lido, licença checada).
-# Formato: repositório  commit  pastas-de-skill (relativas à raiz do repositório)
+# Formato: repositório  commit  pastas (relativas à raiz do repositório)
+#   pasta "."            = o repositório inteiro é a skill (instala com o nome do repositório)
+#   pasta "origem:nome"  = instala a pasta com outro nome
 # Para atualizar: troque o commit, leia o que mudou e rode instalar.sh de novo.
 
-# HyperFrames (HeyGen, Apache-2.0): HTML -> vídeo. Só o conjunto principal recomendado pelo README.
-heygen-com/hyperframes 971499e9d5e43e3915467f671e89a68e0f553be6 skills/hyperframes skills/hyperframes-cli skills/hyperframes-registry skills/media-use
+# HyperFrames (HeyGen, Apache-2.0): HTML -> vídeo. O conjunto principal recomendado pelo README,
+# mais as três regras internas de motion do time deles (continuidade entre cenas, cortes
+# casados por velocidade, transições que compõem certo).
+heygen-com/hyperframes 971499e9d5e43e3915467f671e89a68e0f553be6 skills/hyperframes skills/hyperframes-cli skills/hyperframes-registry skills/media-use .claude/skills/motion-doctrine .claude/skills/cut-the-curve .claude/skills/seam-craft
 
-# Remotion (oficial): vídeo em React. Licença própria: grátis para pessoa física e empresas de até
-# 3 pessoas; acima disso pede licença paga (veja /remotion-license).
-remotion-dev/skills a3f4098a2afd0e13f6a6f8c8760e275f75457ea9 skills/remotion-best-practices skills/remotion-create skills/remotion-markup skills/remotion-elements skills/remotion-maps skills/remotion-multimedia skills/remotion-captions skills/remotion-render skills/remotion-studio skills/remotion-docs skills/remotion-interactivity skills/remotion-license skills/remotion-upgrade skills/remotion-saas
+# GSAP oficial (MIT): o motor de animação que o HyperFrames usa. Só o que serve para vídeo
+# (sem ScrollTrigger, React e frameworks, que são de site).
+greensock/gsap-skills aed9cfd3277740755f6bfc1155c7aa645403b760 skills/gsap-core skills/gsap-timeline skills/gsap-plugins skills/gsap-utils skills/gsap-performance
+
+# Princípios de motion design da LottieFiles (MIT): timing, easing, coreografia, Disney.
+lottiefiles/motion-design-skill d77a9fc8cb371cab1ba5420df5bfd232cd14c9bb skills/motion-design
+
+# Taste Skill (MIT): estética e gosto para sites e páginas. Tem uma checagem final no navegador
+# que só olha páginas locais.
+Leonxlnx/taste-skill d1a2bb41d927083ac7118f60cfc9cdf711810ea0 skills/taste-skill:design-taste-frontend
 
 # Corte de talking head (MIT): tira silêncios, "éé", gaguejos e retakes; legenda e capítulos.
 social-media-skills/video-editing-skill f94d0517d717de281ee23569094aac616d32f4ef skills/video-editing-skill
+
+# video-use (Browser Use, MIT): edição por conversa a partir do bruto, com transcrição
+# ElevenLabs Scribe. ENVIA o áudio para a ElevenLabs: só com o ok da pessoa para cada material.
+browser-use/video-use 43cfc566833548093455c9d4a46bd69913b7e552 .
 
 # Versão do CLI do HyperFrames que acompanha as skills acima (instalar.sh usa esta linha)
 hyperframes-cli 0.9.98
