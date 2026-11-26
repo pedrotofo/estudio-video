@@ -14,6 +14,7 @@ qualquer projeto, no computador ou na nuvem.
 | `decupagem` | Transcreve local e de graça (faster-whisper), com timecode por palavra; marca as melhores falas, o que conferir e cada momento que pede ilustração |
 | `ilustrar-fala` | Motions sincronizados com a fala, com fundo transparente: mapa do Brasil por estados (malha do IBGE), cidades, rotas, números, listas, lugares reais |
 | `premiere-xml` | Leva o corte, os motions e os marcadores da decupagem para o Premiere como timeline editável |
+| `balance-de-cor` | **Versão de teste.** Balance de cor de uma edição no Premiere, como um colorista: mede cada corte, iguala exposição e branco (no log, antes da conversão Rec.709), cria uma LUT própria por corte e confere antes/depois exportado do Premiere. Hoje: Sony S-Log3 + drone |
 
 **Motion (pacote que já existia, agora aqui)**: `brand-intake`, `motion-effects`,
 `animated-chart`, `title-sequence-3d`, `vox-explainer`, `launch-video`, `apple-launch-film`,

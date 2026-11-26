@@ -23,6 +23,7 @@ Este é o mapa das skills. Escolha pelo pedido; não rode tudo sempre.
 | 2b. Edição por conversa a partir de vários brutos (montagem, cor, legenda) | `/video-use` (transcreve no ElevenLabs: veja as regras) | `edit/` com o corte e as transcrições |
 | 3. Ilustrar a fala (mapa, número, lista, lugar, citação) | `/ilustrar-fala` | `motions/*.mov` (ProRes 4444 com alfa) e `insertos.json` |
 | 4. Levar para o Premiere como timeline editável | `/premiere-xml` | `premiere/<nome>.xml` |
+| 4b. Balance de cor da edição no Premiere (exposição e branco iguais entre os cortes; versão de teste, Sony S-Log3 + drone) | `/balance-de-cor` | cópia da sequência com uma LUT própria por corte, prévia e conferência antes/depois |
 | 5. Versão vertical para Reels/TikTok | `/reel-export` | MP4 1080×1920 |
 
 Atalhos comuns:
