@@ -27,5 +27,17 @@ social-media-skills/video-editing-skill f94d0517d717de281ee23569094aac616d32f4ef
 # ElevenLabs Scribe. ENVIA o áudio para a ElevenLabs: só com o ok da pessoa para cada material.
 browser-use/video-use 43cfc566833548093455c9d4a46bd69913b7e552 .
 
+# Awesome Design Skills (Bergside, MIT): 67 estilos visuais prontos (editorial, basic = impresso
+# para livros/revistas/relatórios, minimal, retro, riso, brutalism...). Só texto, sem scripts.
+bergside/awesome-design-skills f631a09b4fcc0166f2e2c1a8c81906ef680c57e8 skills/agentic skills/ant skills/artistic skills/basic skills/bento skills/bold skills/brutalism skills/cafe skills/claude skills/claymorphism skills/clean skills/codex skills/colorful skills/contemporary skills/corporate skills/cosmic skills/creative skills/dithered skills/doodle skills/dramatic skills/editorial skills/enterprise skills/expressive skills/fantasy skills/fiction skills/flat skills/friendly skills/futuristic skills/geometric skills/glassmorphism skills/gradient skills/immersive skills/impeccable skills/levels skills/lingo skills/material skills/matrix skills/minimal skills/modern skills/mono skills/neobrutalism skills/neon skills/neumorphism skills/pacman skills/paper skills/perspective skills/power skills/premium skills/professional skills/pulse skills/refined skills/retro skills/riso skills/roku skills/sega skills/shadcn skills/sketch skills/skeumorphism skills/sleek skills/spacious skills/square skills/stitch skills/storytelling skills/terracotta skills/tetris skills/vibrant skills/vintage
+
+# Practical Typography (Chris Korhonen, MIT): regras de tipografia do livro de Matthew Butterick,
+# para impresso e web. Só texto.
+ckorhonen/claude-skills 68d57b8bad690a5fc26245d7bcd670bc535503be skills/practical-typography
+
+# Editorial Design (agentic-awesome-skills, MIT): layout de revista para web, títulos grandes e
+# pares de fontes. Só texto.
+sickn33/agentic-awesome-skills 939493bcd0aade4be6418d8d7d078e1610d4cd89 skills/design-it/editorial-design
+
 # Versão do CLI do HyperFrames que acompanha as skills acima (instalar.sh usa esta linha)
 hyperframes-cli 0.9.98
