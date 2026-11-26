@@ -21,11 +21,20 @@ Regras:
 
 1. **A fala manda no tempo.** Cada passo da animação cai numa palavra, com o tempo vindo da
    transcrição. Nunca chute tempo.
-2. **Não cubra o rosto.** Olhe um quadro do vídeo antes de escolher onde o motion fica.
-3. **Mostre o que é real.** Lugar real, produto real, logo real. Desenho genérico só para ideia
+2. **Não cubra o rosto.** Olhe um quadro do vídeo antes de escolher onde o motion fica, e olhe de
+   novo no fim do trecho: a pessoa anda, chega perto da câmera, e o zoom muda o enquadramento. O
+   motion tem que ficar livre do rosto (e do cabelo) **durante todo o tempo em que está na tela**.
+3. **Respiro nas bordas (o erro mais comum).** Nada encosta na margem. Em vertical 1080x1920:
+   **100 px nas laterais, 180 px em cima e 380 px embaixo** (a interface do Reels/TikTok cobre a
+   base). Em 1920x1080: 120 px nas laterais e 90 px em cima e embaixo. Conta o que aparece, inclusive
+   brilho, sombra e contorno, não a caixa do elemento. Quem precisa de mais espaço diminui o motion,
+   não chega mais perto da borda.
+4. **O fim fica parado e limpo.** Encerramento termina montado, sem fusão com outra arte de
+   layout diferente (dá "fantasma" de textos sobrepostos).
+5. **Mostre o que é real.** Lugar real, produto real, logo real. Desenho genérico só para ideia
    abstrata.
-4. **Pouco e claro.** Uma ideia por motion, legível no celular (texto com 28 px ou mais em 1080p).
-5. **Use o que existe antes de construir.** Biblioteca do HyperFrames primeiro
+6. **Pouco e claro.** Uma ideia por motion, legível no celular (texto com 28 px ou mais em 1080p).
+7. **Use o que existe antes de construir.** Biblioteca do HyperFrames primeiro
    (`/hyperframes-registry`), depois os geradores desta skill, e só então desenhe do zero.
 
 ## Passo 0: entradas
@@ -33,9 +42,13 @@ Regras:
 - `decup/decupagem.json` e `decup/transcricao.json` (da `/decupagem`). Sem decupagem, rode a
   `/decupagem` antes ou, para um trecho só, transcreva esse trecho.
 - O vídeo do cliente, para ver o enquadramento e conferir o resultado.
-- A marca: se existir `brand.md`/`MOTION.md` (`/brand-intake`), use as cores e a fonte dele. Senão
-  pergunte uma vez as cores e a fonte do cliente, ou use o padrão (branco, destaque `#F2A93B`,
-  Inter).
+- A marca: se existir `brand.md`/`MOTION.md` (`/brand-intake`) ou um guia de edição do cliente,
+  use as cores, a fonte e as peças dele. Senão peça a identidade mínima (logo PNG, 2 a 4 cores ou
+  o KV, a fonte, os PNGs da campanha). O padrão (branco, destaque `#F2A93B`, Inter) só vale para
+  teste interno, nunca para cliente. Os PNGs do cliente são matéria-prima dos motions, não
+  adesivo parado.
+- O roteiro de motions aprovado (`roteiro-motion/ROTEIRO DE MOTIONS.md`, Passo 4 da `/decupagem`).
+  Sem ele, faça o roteiro e as prévias primeiro e espere o ok.
 
 ## Passo 1: planejar cada ilustração
 
@@ -110,7 +123,14 @@ cd motions/I1-mapa
 npx hyperframes check                       # corrija todo erro (contraste, texto pequeno, contrato)
 npx hyperframes render --format mov --fps 25 --output ../I1-mapa.mov   # ProRes 4444 com alfa
 cd ../.. && bash <esta-skill>/scripts/previa.sh VIDEO motions/I1-mapa.mov <inicio> motions/I1-previa
+python3 <esta-skill>/scripts/margens.py motions/*.mov    # respiro nas bordas (obrigatório)
 ```
+
+`margens.py` mede, nos quadros em que o motion está parado, a distância do que aparece até cada
+borda, e falha se passar dos limites da regra 3 (em 1920x1080: `--lado 120 --topo 90 --base 90`).
+Corrija e renderize de novo até passar. Depois de montar no Premiere, exporte os quadros de cada
+motion **no começo e no fim do trecho** e olhe com as guias de margem: o script não sabe onde está
+o rosto.
 
 Olhe `I1-previa.jpg` (três quadros com o motion sobre o cliente) antes de mostrar. Confira se não
 cobre o rosto, se o texto lê, se cada estado acende na palavra. Avisos de `first_frame_empty` e
