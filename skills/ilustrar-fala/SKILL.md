@@ -33,9 +33,13 @@ Regras:
 - `decup/decupagem.json` e `decup/transcricao.json` (da `/decupagem`). Sem decupagem, rode a
   `/decupagem` antes ou, para um trecho só, transcreva esse trecho.
 - O vídeo do cliente, para ver o enquadramento e conferir o resultado.
-- A marca: se existir `brand.md`/`MOTION.md` (`/brand-intake`), use as cores e a fonte dele. Senão
-  pergunte uma vez as cores e a fonte do cliente, ou use o padrão (branco, destaque `#F2A93B`,
-  Inter).
+- A marca: se existir `brand.md`/`MOTION.md` (`/brand-intake`) ou um guia de edição do cliente,
+  use as cores, a fonte e as peças dele. Senão peça a identidade mínima (logo PNG, 2 a 4 cores ou
+  o KV, a fonte, os PNGs da campanha). O padrão (branco, destaque `#F2A93B`, Inter) só vale para
+  teste interno, nunca para cliente. Os PNGs do cliente são matéria-prima dos motions, não
+  adesivo parado.
+- O roteiro de motions aprovado (`roteiro-motion/ROTEIRO DE MOTIONS.md`, Passo 4 da `/decupagem`).
+  Sem ele, faça o roteiro e as prévias primeiro e espere o ok.
 
 ## Passo 1: planejar cada ilustração
 

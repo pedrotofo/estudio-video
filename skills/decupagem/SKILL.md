@@ -5,8 +5,10 @@ description: >-
   tempo por palavra, timecode no fps do vídeo), separa quem fala, marca pausas, divide em temas, dá
   nota às melhores falas (sound bites), aponta erros de transcrição e lista cada momento que pede
   ilustração em motion (um lugar ou mapa citado, um número, uma data, uma lista, um produto, uma
-  citação). Entrega decupagem.md para ler, decupagem.json para as próximas skills, legenda .srt e
-  marcadores para o Premiere. Use quando pedirem "decupa esse vídeo", "decupagem", "logagem",
+  citação). Pede a identidade visual mínima do cliente (logo, cores, fonte, PNGs/KV) e termina
+  sempre num roteiro de motions com prévias sobre o vídeo, para aprovar antes de produzir. Entrega
+  decupagem.md para ler, decupagem.json para as próximas skills, legenda .srt, marcadores para o
+  Premiere e o roteiro de motions. Use quando pedirem "decupa esse vídeo", "decupagem", "logagem",
   "transcreve a fala", "separa as melhores falas", "quais trechos usar", "marca os sound bites",
   "o que dá para ilustrar nesse vídeo", ou mandarem um vídeo de alguém falando.
 ---
@@ -32,6 +34,12 @@ Regras que não mudam:
 3. Quantas pessoas falam (só a cliente? entrevistador junto?).
 4. Para que é o vídeo e quanto tempo terá (ex.: Reels de 60 s, institucional de 3 min). Isso decide
    a nota das falas.
+5. **A identidade visual do cliente, no mínimo** (toda decupagem termina num roteiro de motions,
+   Passo 4, e ele precisa disso): logo em PNG com fundo transparente; 2 a 4 cores (ou o KV da
+   campanha, de onde se tiram as cores); a fonte, ou uma arte onde ela apareça; e, se houver,
+   os PNGs da campanha e um vídeo de referência de motion já aprovado. Se existir
+   `brand.md`/`MOTION.md` (`/brand-intake`) ou um guia de edição do cliente, leia antes de
+   perguntar. Sem nada disso, pergunte de novo: não invente paleta para cliente.
 
 ## Passo 1: transcrever
 
@@ -116,9 +124,36 @@ fica na tela enquanto a ideia dura. Escolha o tipo pela fala, não pelo efeito:
 | Um produto, marca, site, app | Imagem real do produto ou tela, nunca desenho genérico |
 | Algo abstrato (confiança, crescimento) | Ícone animado ou metáfora simples; pouco, só se pedir |
 
-## Passo 4: entregar
+## Passo 4: roteiro de motions (obrigatório em vídeo falado)
 
-- Mostre o resumo, as ★★★ e a lista "Para ilustrar"; o resto fica em `decupagem.md`.
+Vídeo falado sempre ganha motion: é o que deixa a peça agradável e acentua as informações-chave.
+Depois da decupagem (e, se a pessoa já cortou a timeline, **sobre a timeline final dela**, com os
+tempos recalculados), escreva `roteiro-motion/ROTEIRO DE MOTIONS.md` **antes de produzir qualquer
+motion**:
+
+1. **Reassista o material inteiro**: um quadro a cada 1 a 1,5 s da timeline (mosaico) e a fala
+   palavra por palavra. Marque onde está o rosto em cada plano.
+2. **Uma tabela**: tempo, fala (com a palavra-gatilho em negrito), o motion, onde fica no quadro e
+   o som. Marque como *opcional* o que é bom mas não essencial.
+3. **Regras de bom gosto** (vêm dos guias aprovados do Riomar e da Diamantes):
+   - cada motion entra na palavra exata e sai antes do próximo; uns 6 a 8 motions por 40 s;
+   - deixe **respiros** (pergunta para a câmera, stop motion, momento de expressão) sem nada;
+   - nunca em cima do rosto: terço de cima ou faixa de 60–82% da altura, conforme o plano;
+   - sem caixa/card grande atrás do texto; pílulas pequenas, letreiros e ícones;
+   - formatos variados (logo se montando, contador, calendário, lista, seta para o objeto real,
+     balão), sem repetir a mesma animação o vídeo todo;
+   - **os PNGs/KV do cliente são matéria-prima**: o motion é feito a partir deles (partes do logo
+     se montando, data virando calendário, KV montando em camadas), não colado parado;
+   - um efeito sonoro por motion, baixinho (~15 dB abaixo da voz).
+4. **Prévias**: 4 a 6 quadros dos motions principais, feitos no HyperFrames **sobre o quadro real**
+   do vídeo (com a cor final), juntos em `roteiro-motion/previas.jpg`.
+5. **Mostre o roteiro e as prévias e espere o ok.** Só então produza com `/ilustrar-fala`
+   (cada motion em `.mov` ProRes 4444 com transparência, numa faixa própria no Premiere).
+
+## Passo 5: entregar
+
+- Mostre o resumo, as ★★★, a lista "Para ilustrar" e o roteiro de motions com as prévias; o resto
+  fica em `decupagem.md`.
 - Ofereça os próximos passos:
   - **marcadores no Premiere**: `/premiere-xml` com `decupagem.json` cria a sequência com um
     marcador colorido em cada fala boa e em cada ponto de ilustração;
