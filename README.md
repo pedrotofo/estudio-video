@@ -30,6 +30,10 @@ qualquer projeto, no computador ou na nuvem.
 - `design-taste-frontend` (Taste Skill): estética para páginas e sites
 - `video-editing-skill`: silêncios, "éé", retakes, legenda
 - `video-use`: edição por conversa com transcrição no ElevenLabs (envia o áudio para lá)
+- Awesome Design Skills (Bergside): 67 estilos visuais, como `editorial`, `basic` (impresso:
+  livros, revistas, relatórios), `minimal`, `retro`, `riso`, `brutalism`, `vintage`
+- `practical-typography`: regras de tipografia para impresso e web (Butterick)
+- `editorial-design`: layout de revista para sites, títulos grandes e pares de fontes
 
 ## Como instalar
 
