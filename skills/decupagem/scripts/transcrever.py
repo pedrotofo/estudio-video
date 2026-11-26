@@ -170,10 +170,20 @@ def main():
     prompt = "Hã, é... então, tipo assim. " + (", ".join(termos) + "." if termos else "")
 
     print(f"  transcrevendo com faster-whisper '{a.modelo}' ({a.idioma}, {fps:.3f} fps)...", file=sys.stderr)
-    modelo = WhisperModel(a.modelo, device="auto", compute_type="auto")
-    segs, info = modelo.transcribe(a.video, language=a.idioma or None, word_timestamps=True,
-                                   vad_filter=True, initial_prompt=prompt,
-                                   hotwords=", ".join(termos) or None, condition_on_previous_text=False)
+    def rodar(dispositivo, tipo):
+        modelo = WhisperModel(a.modelo, device=dispositivo, compute_type=tipo)
+        segs, info = modelo.transcribe(a.video, language=a.idioma or None, word_timestamps=True,
+                                    vad_filter=True, initial_prompt=prompt,
+                                    hotwords=", ".join(termos) or None, condition_on_previous_text=False)
+        return list(segs), info  # o gerador só roda aqui: é onde a falta do CUDA aparece
+    try:
+        segs, info = rodar("auto", "auto")
+    except RuntimeError as e:
+        # Windows com placa NVIDIA mas sem as bibliotecas do CUDA (cublas/cudnn): segue no processador.
+        if not any(k in str(e).lower() for k in ("cublas", "cudnn", "cuda")):
+            raise
+        print(f"  placa de vídeo indisponível ({e}); transcrevendo no processador", file=sys.stderr)
+        segs, info = rodar("cpu", "int8")
     segmentos = []
     for s in segs:
         palavras = [{"p": w.word.strip(), "inicio": round(w.start, 3), "fim": round(w.end, 3),
