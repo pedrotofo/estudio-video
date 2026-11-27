@@ -202,7 +202,8 @@ No PowerShell: `$env:PYTHONIOENCODING="utf-8"`.
    - decida a ordem pela lógica do roteiro.
    Escreva `selection.json` (e `selection_alt.json`) em ordem de timeline. Uma emenda vira **duas entradas
    seguidas com o mesmo `block`**:
-   `[{"block": "Abertura", "file": "TOFO8882", "start": 1.38, "end": 12.10}, {"block": "Abertura", "file": "TOFO8885", "start": 14.02, "end": 22.40}, ...]`
+   `[{"block": "Abertura", "file": "TOFO8882", "start": 1.38, "end": 12.10, "texto": "Luxo se tornou uma palavra saturada."}, {"block": "Abertura", "file": "TOFO8885", "start": 14.02, "end": 22.40, "texto": "..."}, ...]`
+   `texto` = a fala daquele trecho como vai aparecer no roteiro decupado, **copiada da transcrição**, nunca reescrita.
    `start` = início da 1ª palavra; `end` = fim (`e`) da última palavra, como veio da transcrição. **Não ajuste o
    `end` à mão:** o `build_cuts.py` acha o fim real pelo som. Só garanta que nenhuma palavra de outra frase (ou do
    diretor) caia antes do `end`.
@@ -210,10 +211,25 @@ No PowerShell: `$env:PYTHONIOENCODING="utf-8"`.
    da 2ª). Separadas, o fim de uma encosta no começo da outra.
    **Olhe uma foto de cada take antes de escolher:** em alguns clientes (Maria Clara) a narração é gravada com a
    câmera ligada, mas apontada para o chão. O "take com ela falando" pode ser só áudio.
+   **Trava contra fala inventada (obrigatória):** `python -P scripts/checar_selecao.py <work>` (e
+   `--sel selection_alt.json`). Confere o `texto` de cada trecho com o que a transcrição tem entre `start` e `end`.
+   Todo `DIVERGE` ou `SEM TEXTO` se corrige antes de seguir: o texto volta a ser o que a pessoa disse, ou o
+   `start`/`end` passa a cobrir a fala certa. Nunca "melhore" a fala de ninguém.
 8. **Pré-visualizar os cortes:** `python -P scripts/build_cuts.py <work> <fps>` e
    `python -P scripts/build_cuts.py <work> <fps> --sel selection_alt.json` (este gera `cuts_alt.json` e
    `batch_alt.json`). Eles imprimem o texto final de cada fala; confira se não sobrou palavra de outra frase nem
    faltou o começo.
+   **Ouvir o corte de novo (obrigatório):** `python -P scripts/conferir_corte.py <work>` e
+   `python -P scripts/conferir_corte.py <work> --cuts cuts_alt.json`. Ele monta o áudio exatamente como vai para o
+   Premiere, transcreve de novo e compara com os `texto` aprovados. Leva menos de 1 min na placa de vídeo.
+   - `EMENDAS COM PALAVRA FALTANDO OU SOBRANDO`: corte comendo palavra (ou sobrando palavra de outra fala). Corrija
+     antes de mostrar o roteiro: puxe o `start` um pouco para trás (ou o `end` para frente) daquele trecho, rode o
+     `build_cuts.py` e o `conferir_corte.py` de novo. Se não resolver, ponha no roteiro como "conferir no ouvido".
+   - `PARA CONFERIR NO OUVIDO`: longe das emendas, quase sempre é só o Whisper ouvindo diferente. Vai para a lista
+     do relatório, sem mexer.
+   - **Volume:** o resultado diz quanto falta para -14 LUFS (o padrão de Reels, TikTok e YouTube). É medido no áudio
+     bruto da câmera: anote no relatório como guia. Quando o Pedro exportar o vídeo final, meça o arquivo com
+     `python -P scripts/conferir_corte.py --arquivo "<exportado.mp4>"` e diga quanto subir ou baixar no master.
 9. **Aprovação (obrigatória):** escreva `<work>/roteiro-decupado.md`, copie para a pasta da sessão e mostre ao
    Pedro. Formato:
 
@@ -298,6 +314,10 @@ espere o Premiere aberto.
   montar, confira **todas** as emendas pelo som, nas duas pontas: o fim do clipe A termina ~0,25 s depois da voz (nunca
   no meio dela) e o clipe B começa no ataque da voz, com no máximo ~0,05 s de silêncio antes. Corrija antes de entregar
   e diga no relatório quantas emendas foram ajustadas.
+- **Resposta curta comida no começo (27/11/2026, teste na Black Friday da Maria Clara).** Em falas de 2 ou 3
+  palavras ("Dá sim."), o `build_cuts.py` pode tomar a 1ª palavra por contagem e começar depois dela: o
+  `conferir_corte.py` acusou "faltou: Dá sim.". Em fala curta, junte com a fala anterior do mesmo take (um pedaço
+  só) ou puxe o `start` para antes da 1ª palavra e confira de novo.
 - **Transições com som** (ex.: FILMBURNS) tocam por cima da fala: coloque-as com `linkAudio: false`.
 - **Premiere puxa o in 1 quadro para trás** ao colocar um clipe. Se precisar estender o out de um clipe já
   colocado (para tapar um buraco de 1 quadro), ele invade o começo do seguinte: recoloque o seguinte depois.
@@ -326,6 +346,7 @@ espere o Premiere aberto.
 3. Alternativas: o que está na sequência de Alternativas e as outras leituras descartadas, com tempos.
 4. Divergências do roteiro: frases em que nenhum take falou exatamente o texto.
 5. **Conferir no ouvido:** inícios suspeitos de contagem, palavras com confiança baixa, takes com ruído ou
-   interrupção.
+   interrupção, e o que o `conferir_corte.py` listou (com o tempo na sequência).
+5b. **Volume:** o número do `conferir_corte.py` e quanto subir ou baixar para -14 LUFS.
 6. O que ficou de fora (equipe, perguntas, falas incompletas) e por quê.
 7. Aprendizados deste vídeo que devem virar regra nesta skill. Pergunte ao Pedro se pode atualizá-la.
