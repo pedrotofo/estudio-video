@@ -40,6 +40,10 @@ Responda sempre em português simples, sem termos técnicos.
 | **Câmeras** | Quase sempre 1 câmera. Se aparecer mais de uma, ou som de lapela separado, pare e pergunte como ele quer. |
 | **Roteiro** | Às vezes vem junto. Com roteiro: comparar palavra por palavra. Sem roteiro: deduzir a frase pretendida comparando as repetições. |
 
+**Briefing primeiro:** se o Pedro citar um projeto do Caravela Edit, leia o briefing antes de perguntar qualquer coisa
+(`ArtifactData`, `action: "list"`, url `https://claude.ai/artifact/YZiZzizxcHoWPpxcw9hpfa`, `collection: "briefings"`).
+Ele já responde quase tudo abaixo: material, roteiro, tipo de gravação e a pergunta 5. Pergunte só o que faltar.
+
 **Pergunte no começo** (AskUserQuestion, uma vez só) apenas o que não dá para saber pelo material:
 1. Qual sequência ou quais clipes decupar, se não estiver óbvio.
 2. Se tem roteiro ou texto (peça o arquivo, ou que ele cole).

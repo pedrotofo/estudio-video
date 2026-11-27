@@ -20,7 +20,14 @@ Este é o mapa das skills. Escolha pelo pedido; não rode tudo sempre.
 pelo MCP `premiere-pro`; nada mexe no bruto nem na sequência original. Antes de começar, leia o guia do cliente
 (Riomar e Diamantes têm guias aprovados: veja o CLAUDE.md da pessoa).
 
-**Nenhuma etapa além da decupagem é automática.** Em toda edição nova, pergunte primeiro (uma janela só, com
+**Briefing do Caravela Edit.** O Pedro preenche o briefing de cada projeto na página Caravela Edit
+(https://claude.ai/artifact/YZiZzizxcHoWPpxcw9hpfa). Quando ele disser "começa a edição do projeto X do Caravela Edit"
+(ou citar um projeto de lá), leia com a ferramenta `ArtifactData`: `action: "list"`, essa `url`, `collection: "briefings"`,
+e ache o projeto pelo cliente e pelo nome. O briefing traz cliente, pastas, Premiere, tipo de gravação, roteiro, nomes e
+as escolhas da edição (`zooms`: nenhum/dinamico/calmo; `cor`, `motions`, `sons`: sim/nao). Use tudo isso, não pergunte
+de novo o que já está lá e pergunte só o que faltar. O documento `exemplo-riomar-luxo` é só um exemplo.
+
+**Nenhuma etapa além da decupagem é automática.** Sem briefing, em toda edição nova, pergunte primeiro (uma janela só, com
 AskUserQuestion) o que o Pedro quer desta vez:
 - **Zooms:** nenhum / dinâmico (vídeo animado, interativo, tipo Ivens) / calmo (institucional ou documental, tipo
   Novais e Diamantes);
