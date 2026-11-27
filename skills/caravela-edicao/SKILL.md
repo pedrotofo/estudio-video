@@ -3,16 +3,16 @@ name: caravela-edicao
 description: >-
   Começa um projeto novo de edição de vídeo do Pedro a partir de um briefing por áudio. Manda o roteiro do que
   falar no áudio, recebe o áudio (gravado pelo microfone do app ou como arquivo do WhatsApp/celular), transcreve
-  no computador, monta o briefing, pergunta só o que faltou, salva no Caravela Edit e dá a largada na edição pelo
-  fluxo do Estúdio de Vídeo. Use quando o Pedro chamar /caravela-edicao ou disser "nova edição", "projeto novo de
-  vídeo", "vou te mandar um áudio explicando o vídeo", "briefing de edição", "começar a editar um vídeo novo".
+  no computador, monta o briefing, pergunta só o que faltou, guarda o briefing na pasta do job e dá a largada na
+  edição pelo fluxo do Estúdio de Vídeo. Use quando o Pedro chamar /caravela-edicao ou disser "nova edição",
+  "projeto novo de vídeo", "vou te mandar um áudio explicando o vídeo", "briefing de edição", "começar a editar um
+  vídeo novo".
 ---
 
 # Caravela Edição
 
 A porta de entrada de toda edição nova. O Pedro gosta de briefar falando: um áudio longo explicando o trabalho.
-Esta skill guia o que ele deve falar, entende o áudio, guarda o briefing no **Caravela Edit**
-(https://claude.ai/artifact/YZiZzizxcHoWPpxcw9hpfa, coleção `briefings`) e começa a edição.
+Esta skill guia o que ele deve falar, entende o áudio, confirma o que faltou e começa a edição.
 
 Fale com ele em português simples, sem termos técnicos.
 
@@ -56,28 +56,21 @@ Se ele já mandou o áudio junto com o comando, pule direto para o passo 2.
 
 ## 3. Montar o briefing
 
-Preencha os campos do Caravela Edit (os mesmos que a página usa):
-
-| Campo | Valor |
-|---|---|
-| `cliente` | Riomar, Diamantes, Maria Clara, Novais Arquitetura, ou "Outro" com `clienteOutro` |
-| `projeto` | o nome do vídeo, curto ("Black Friday Eusébio") |
-| `prazo` | AAAA-MM-DD, se ele disse |
-| `formato` | "Vertical 9:16", "Horizontal 16:9" ou "Quadrado 1:1" |
-| `duracao` | "30", "60", "120", "180" ou "300" (o mais perto do que ele disse) |
-| `pasta` | a pasta do job, conferida no disco |
-| `sequencia` | se ele citou uma sequência já montada |
-| `gravacao` | "Fala para a câmera, vários takes", "Entrevista com perguntas", "Locução ou narração" ou "Fala andando ou em loja" |
-| `termos` | nomes de lojas, produtos, lugares, pessoas que ele citou |
-| `temRoteiro` / `roteiro` | "sim"/"nao"; o texto, se veio |
-| `zooms` | "nenhum", "dinamico" ou "calmo" |
-| `cor`, `motions`, `sons` | "sim" ou "nao" |
-| `trilha`, `identidade` | se ele disse (identidade: pasta do logo/KV, só para cliente sem guia) |
-| `notas` | para que é, tom, referências, pedidos, o que evitar, e qualquer coisa do áudio que não coube acima |
+Tire do áudio:
+- **cliente** (Riomar, Diamantes, Maria Clara, Novais Arquitetura ou outro) e **nome do vídeo**;
+- **para que é**, **formato** (vertical 9:16, horizontal 16:9, quadrado) e **duração** aproximada; **prazo**, se disse;
+- **pasta do job**, conferida no disco, e a **sequência** do Premiere, se citou uma;
+- **como foi gravado**: fala para a câmera com vários takes, entrevista com perguntas, locução ou narração, ou fala
+  andando ou em loja (os quatro tipos da `/decupagem-falas-premiere`); **quem fala**;
+- **nomes** que vão aparecer na fala (lojas, produtos, lugares, pessoas): ajudam a transcrição da decupagem;
+- **roteiro**: se tem e onde está;
+- as **quatro escolhas da edição**: zooms (nenhum, dinâmico ou calmo), balanço de cor, motions, sons do Artlist
+  (e trilha);
+- **notas**: tom, referências, pedidos do cliente, o que evitar, e tudo do áudio que não coube acima.
 
 **Confira a pasta no disco:** que ela existe, onde está o `.prproj`, quantos vídeos brutos e onde, se há pasta de
-artes/PNGs. Se ele não disse a pasta, mostre as pastas de `D:\Jobs` mais recentes e pergunte. Para Riomar e
-Diamantes, lembre que os guias deles valem (CLAUDE.md).
+artes/PNGs (a identidade para os motions). Se ele não disse a pasta, mostre as pastas de `D:\Jobs` mais recentes e
+pergunte. Para Riomar e Diamantes, lembre que os guias deles valem (CLAUDE.md).
 
 Não invente: o que ele não disse e não dá para ver na pasta fica vazio e vira pergunta.
 
@@ -87,17 +80,13 @@ Uma mensagem curta: **"Entendi assim:"** e uma tabela de 6 a 10 linhas com o ess
 duração, pasta e o que achei nela, gravação, roteiro, e as quatro escolhas da edição).
 
 Depois, **uma janela só** do AskUserQuestion com o que faltou, no máximo 4 perguntas. Prioridade: as quatro escolhas
-da edição (zooms, cor, motions, sons) e a pasta; o resto pode ficar vazio. Se nada faltar, só peça o ok.
+da edição e a pasta; o resto pode ficar vazio. Se nada faltar, só peça o ok.
 
-## 5. Salvar no Caravela Edit e abrir
+## 5. Guardar o briefing
 
-- `ArtifactData`, `action: "set"`, url `https://claude.ai/artifact/YZiZzizxcHoWPpxcw9hpfa`, `collection: "briefings"`,
-  `doc_id`: `<cliente>-<video>` em minúsculas sem acento e com hífens + `-` + 4 letras/números ao acaso
-  (ex.: `maria-clara-black-friday-eusebio-q7k2`). Dados: todos os campos acima, mais `status: "pronto"`,
-  `criado` e `atualizado` (data e hora ISO), `origem: "audio"`.
-- O código do briefing é **CE-** + as 4 últimas letras do id, em maiúsculas (CE-Q7K2). Diga o código ao Pedro.
-- Abra a página para ele ver (Artifact, `action: "open"`, a mesma url): a timeline mostra o que vai entrar.
-- Se ele corrigir algo depois (na conversa ou na página), releia o documento antes de seguir.
+Depois do ok, grave `BRIEFING.md` na pasta do job (ao lado do `.prproj`): a tabela aprovada, as notas e, no fim, a
+transcrição do áudio. Se já existir um, guarde o anterior como `BRIEFING (anterior).md`. É o que as outras skills e
+uma conversa futura leem para continuar o trabalho sem perguntar de novo.
 
 ## 6. Dar a largada
 
@@ -108,8 +97,4 @@ da edição (zooms, cor, motions, sons) e a pasta; o resto pode ficar vazio. Se 
   aprovação. A pergunta de abertura da decupagem já está respondida pelo briefing: não repita.
 - A versão vertical não entra: ele pede no fim, se quiser.
 
-## Outras portas
-
-- **Frase do Caravela Edit** ("Começa a edição do briefing CE-XXXX…"): o Pedro preencheu na página. Leia o briefing
-  (`ArtifactData` `list`) e vá direto para o passo 4 (só o que faltar) e o 6.
-- **Briefing escrito em vez de áudio:** trate o texto como a transcrição e siga do passo 3.
+**Briefing escrito em vez de áudio:** trate o texto como a transcrição e siga do passo 3.

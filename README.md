@@ -11,7 +11,7 @@ qualquer projeto, no computador ou na nuvem.
 | Skill | Faz |
 |---|---|
 | `estudio-video` | O mapa: qual skill usar em cada etapa |
-| `caravela-edicao` | **A porta de entrada.** `/caravela-edicao`: manda o roteiro do áudio de briefing, transcreve o áudio no computador, monta o briefing, pergunta só o que faltou, salva no Caravela Edit e começa a edição |
+| `caravela-edicao` | **A porta de entrada.** `/caravela-edicao`: manda o roteiro do áudio de briefing, transcreve o áudio no computador, monta o briefing, pergunta só o que faltou, grava o `BRIEFING.md` na pasta do job e começa a edição |
 | `decupagem-falas-premiere` | **A decupagem.** Dentro do Premiere (MCP): transcreve com WhisperX, escolhe o melhor take de cada fala (com emendas), tira contagem e silêncios, mostra o roteiro decupado para aprovação e monta as sequências "Limpa" e "Alternativas". No fim, lista o que ilustrar e gera a transcrição, a legenda de uma linha e o `decupagem.json` |
 | `balance-de-cor` | **Versão de teste.** Balance de cor de uma edição no Premiere, como um colorista: mede cada corte, iguala exposição e branco (no log, antes da conversão Rec.709), cria uma LUT própria por corte e confere antes/depois exportado do Premiere. Hoje: Sony S-Log3 + drone |
 | `zooms-premiere` | Zooms no rosto direto no Premiere: estilo dinâmico (o aprovado no vídeo do luxo do Ivens) ou calmo (o da Diamantes), com backup e um comando para tirar |

@@ -20,22 +20,11 @@ Este é o mapa das skills. Escolha pelo pedido; não rode tudo sempre.
 pelo MCP `premiere-pro`; nada mexe no bruto nem na sequência original. Antes de começar, leia o guia do cliente
 (Riomar e Diamantes têm guias aprovados: veja o CLAUDE.md da pessoa).
 
-**Briefing do Caravela Edit.** O Pedro preenche o briefing de cada vídeo na página Caravela Edit
-(https://claude.ai/artifact/YZiZzizxcHoWPpxcw9hpfa). O botão "Começar a edição" copia uma frase como
-*Começa a edição do briefing CE-7K2Q ("Riomar, Vídeo do luxo") do Caravela Edit.* Quando ela chegar:
-- Leia com `ArtifactData`: `action: "list"`, essa `url`, `collection: "briefings"`. O código CE-XXXX são os 4 últimos
-  caracteres do id do documento, em maiúsculas.
-- Campos: `cliente` (`clienteOutro` quando "Outro"), `projeto` (nome do vídeo), `prazo`, `formato`, `duracao` (segundos:
-  30/60/120/180/300), `pasta` (a pasta do job: ache o bruto e o .prproj lá dentro), `sequencia`, `gravacao` (um dos 4
-  tipos), `termos`, `roteiro`, `zooms` (nenhum/dinamico/calmo), `cor`/`motions`/`sons` (sim/nao), `trilha`,
-  `identidade`, `notas` (objetivo, tom, referências, pedidos). Briefings da versão 1 podem trazer `objetivo`, `tom`,
-  `premiere`, `apoio`, `obs` e `gravacao` como lista: leia esses também.
-- Use tudo, não pergunte de novo o que já está lá e pergunte só o que faltar. O `exemplo-riomar-luxo` é só um exemplo.
-- Quando terminar uma etapa grande, pode anotar no briefing (`update` do campo `notas`), se o Pedro quiser.
-
-**Projeto novo sem briefing.** Se o Pedro disser "nova edição", "projeto novo de vídeo", "vamos editar um vídeo novo"
-e não houver briefing: use a `/caravela-edicao`. Ela manda o roteiro do áudio de briefing, transcreve, salva no
-Caravela Edit e dá a largada. Se ele preferir não mandar áudio nem usar a página, faça a pergunta de abertura abaixo.
+**Projeto novo: `/caravela-edicao`.** Quando o Pedro chamar a skill ou disser "nova edição", "projeto novo de vídeo",
+"vamos editar um vídeo novo", use a `/caravela-edicao`: ela manda o roteiro do áudio de briefing, transcreve no
+computador, pergunta só o que faltou, grava `BRIEFING.md` na pasta do job e dá a largada. Num job que já tem
+`BRIEFING.md`, leia ele antes de perguntar qualquer coisa. Se ele não quiser mandar áudio, faça a pergunta de abertura
+abaixo.
 
 **Nenhuma etapa além da decupagem é automática.** Sem briefing, em toda edição nova, pergunte primeiro (uma janela só, com
 AskUserQuestion) o que o Pedro quer desta vez:
