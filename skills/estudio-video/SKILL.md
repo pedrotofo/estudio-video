@@ -20,12 +20,24 @@ Este é o mapa das skills. Escolha pelo pedido; não rode tudo sempre.
 pelo MCP `premiere-pro`; nada mexe no bruto nem na sequência original. Antes de começar, leia o guia do cliente
 (Riomar e Diamantes têm guias aprovados: veja o CLAUDE.md da pessoa).
 
-**Briefing do Caravela Edit.** O Pedro preenche o briefing de cada projeto na página Caravela Edit
-(https://claude.ai/artifact/YZiZzizxcHoWPpxcw9hpfa). Quando ele disser "começa a edição do projeto X do Caravela Edit"
-(ou citar um projeto de lá), leia com a ferramenta `ArtifactData`: `action: "list"`, essa `url`, `collection: "briefings"`,
-e ache o projeto pelo cliente e pelo nome. O briefing traz cliente, pastas, Premiere, tipo de gravação, roteiro, nomes e
-as escolhas da edição (`zooms`: nenhum/dinamico/calmo; `cor`, `motions`, `sons`: sim/nao). Use tudo isso, não pergunte
-de novo o que já está lá e pergunte só o que faltar. O documento `exemplo-riomar-luxo` é só um exemplo.
+**Briefing do Caravela Edit.** O Pedro preenche o briefing de cada vídeo na página Caravela Edit
+(https://claude.ai/artifact/YZiZzizxcHoWPpxcw9hpfa). O botão "Começar a edição" copia uma frase como
+*Começa a edição do briefing CE-7K2Q ("Riomar, Vídeo do luxo") do Caravela Edit.* Quando ela chegar:
+- Leia com `ArtifactData`: `action: "list"`, essa `url`, `collection: "briefings"`. O código CE-XXXX são os 4 últimos
+  caracteres do id do documento, em maiúsculas.
+- Campos: `cliente` (`clienteOutro` quando "Outro"), `projeto` (nome do vídeo), `prazo`, `formato`, `duracao` (segundos:
+  30/60/120/180/300), `pasta` (a pasta do job: ache o bruto e o .prproj lá dentro), `sequencia`, `gravacao` (um dos 4
+  tipos), `termos`, `roteiro`, `zooms` (nenhum/dinamico/calmo), `cor`/`motions`/`sons` (sim/nao), `trilha`,
+  `identidade`, `notas` (objetivo, tom, referências, pedidos). Briefings da versão 1 podem trazer `objetivo`, `tom`,
+  `premiere`, `apoio`, `obs` e `gravacao` como lista: leia esses também.
+- Use tudo, não pergunte de novo o que já está lá e pergunte só o que faltar. O `exemplo-riomar-luxo` é só um exemplo.
+- Quando terminar uma etapa grande, pode anotar no briefing (`update` do campo `notas`), se o Pedro quiser.
+
+**Projeto novo sem briefing.** Se o Pedro disser "nova edição", "projeto novo de vídeo", "vamos editar um vídeo novo"
+e não houver briefing: mande o link do Caravela Edit (abra com a ação `open` do Artifact) e ofereça preencher um
+rascunho a partir do que ele já contou (`ArtifactData` `set` em `briefings`, id `<cliente>-<video>-<4 letras>`,
+`status: "rascunho"`). Ele completa e clica em "Começar a edição". Se ele preferir não usar a página, faça a pergunta
+de abertura abaixo.
 
 **Nenhuma etapa além da decupagem é automática.** Sem briefing, em toda edição nova, pergunte primeiro (uma janela só, com
 AskUserQuestion) o que o Pedro quer desta vez:
