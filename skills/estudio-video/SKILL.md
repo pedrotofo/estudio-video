@@ -78,6 +78,7 @@ Atalhos comuns:
 | Comparar 3 IAs no mesmo pedido | `/model-showdown` |
 | Gosto e acabamento do motion: timing, easing, coreografia | `/motion-design` (princípios), `/motion-doctrine` e `/cut-the-curve` (continuidade e transições do time do HyperFrames), `/seam-craft` (cortes sem flash) |
 | Escrever a animação em GSAP (o motor do HyperFrames) | `/gsap-core`, `/gsap-timeline`, `/gsap-plugins`, `/gsap-utils`, `/gsap-performance` |
+| Direção visual de páginas e interfaces (tipografia, paleta, textos) | `/frontend-design` (Anthropic) |
 | Estética de páginas e sites (landing page do cliente, portfólio) | `/design-taste-frontend` |
 | Motion graphic com estilo de referência (galeria, 5 perguntas, cards para aprovar) | `/claude-video` (usa o HyperFrames) |
 | Escrever o pedido de um motion | `/motion-brief-writer` (para construir aqui no Claude Code); `/reference-to-motion` (a partir de um vídeo de referência) |

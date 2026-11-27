@@ -31,6 +31,7 @@ Skills que saíram ficam em `removidas.txt`: o `instalar.sh` apaga a cópia velh
 - GSAP oficial: `gsap-core`, `gsap-timeline`, `gsap-plugins`, `gsap-utils`, `gsap-performance`
 - `motion-design` (LottieFiles): princípios de timing, easing e coreografia
 - `design-taste-frontend` (Taste Skill): estética para páginas e sites
+- `frontend-design` (Anthropic): direção visual, tipografia e textos de páginas e interfaces
 - `video-editing-skill`: silêncios, "éé", retakes, legenda
 - `video-use`: edição por conversa com transcrição no ElevenLabs (envia o áudio para lá)
 

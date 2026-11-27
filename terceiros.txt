@@ -20,6 +20,10 @@ lottiefiles/motion-design-skill d77a9fc8cb371cab1ba5420df5bfd232cd14c9bb skills/
 # que só olha páginas locais.
 Leonxlnx/taste-skill d1a2bb41d927083ac7118f60cfc9cdf711810ea0 skills/taste-skill:design-taste-frontend
 
+# Front-end da Anthropic (Apache-2.0): direção visual, tipografia e textos de páginas e interfaces. Só
+# instruções em texto, sem scripts. É a "skill de front-end"; a de cima é a "skill de design taste".
+anthropics/skills 41bbe19d1a1a7eaab5e7bb9050a417e5c6cffc8f skills/frontend-design
+
 # Corte de talking head (MIT): tira silêncios, "éé", gaguejos e retakes; legenda e capítulos.
 social-media-skills/video-editing-skill f94d0517d717de281ee23569094aac616d32f4ef skills/video-editing-skill
 
