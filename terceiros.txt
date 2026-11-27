@@ -7,7 +7,7 @@
 # HyperFrames (HeyGen, Apache-2.0): HTML -> vídeo. O conjunto principal recomendado pelo README,
 # mais as três regras internas de motion do time deles (continuidade entre cenas, cortes
 # casados por velocidade, transições que compõem certo).
-heygen-com/hyperframes 971499e9d5e43e3915467f671e89a68e0f553be6 skills/hyperframes skills/hyperframes-cli skills/hyperframes-registry skills/media-use .claude/skills/motion-doctrine .claude/skills/cut-the-curve .claude/skills/seam-craft
+heygen-com/hyperframes 638209cf14142f52139da30cbb12d32252cb8199 skills/hyperframes skills/hyperframes-cli skills/hyperframes-registry skills/media-use .claude/skills/motion-doctrine .claude/skills/cut-the-curve .claude/skills/seam-craft
 
 # GSAP oficial (MIT): o motor de animação que o HyperFrames usa. Só o que serve para vídeo
 # (sem ScrollTrigger, React e frameworks, que são de site).
@@ -18,7 +18,7 @@ lottiefiles/motion-design-skill d77a9fc8cb371cab1ba5420df5bfd232cd14c9bb skills/
 
 # Taste Skill (MIT): estética e gosto para sites e páginas. Tem uma checagem final no navegador
 # que só olha páginas locais.
-Leonxlnx/taste-skill d1a2bb41d927083ac7118f60cfc9cdf711810ea0 skills/taste-skill:design-taste-frontend
+Leonxlnx/taste-skill 952435f63acece7d2fcb4b4d3c1786c1c43603e0 skills/taste-skill:design-taste-frontend
 
 # Corte de talking head (MIT): tira silêncios, "éé", gaguejos e retakes; legenda e capítulos.
 social-media-skills/video-editing-skill f94d0517d717de281ee23569094aac616d32f4ef skills/video-editing-skill
@@ -28,4 +28,4 @@ social-media-skills/video-editing-skill f94d0517d717de281ee23569094aac616d32f4ef
 browser-use/video-use 43cfc566833548093455c9d4a46bd69913b7e552 .
 
 # Versão do CLI do HyperFrames que acompanha as skills acima (instalar.sh usa esta linha)
-hyperframes-cli 0.9.98
+hyperframes-cli 0.9.102
