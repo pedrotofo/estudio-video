@@ -34,10 +34,8 @@ pelo MCP `premiere-pro`; nada mexe no bruto nem na sequência original. Antes de
 - Quando terminar uma etapa grande, pode anotar no briefing (`update` do campo `notas`), se o Pedro quiser.
 
 **Projeto novo sem briefing.** Se o Pedro disser "nova edição", "projeto novo de vídeo", "vamos editar um vídeo novo"
-e não houver briefing: mande o link do Caravela Edit (abra com a ação `open` do Artifact) e ofereça preencher um
-rascunho a partir do que ele já contou (`ArtifactData` `set` em `briefings`, id `<cliente>-<video>-<4 letras>`,
-`status: "rascunho"`). Ele completa e clica em "Começar a edição". Se ele preferir não usar a página, faça a pergunta
-de abertura abaixo.
+e não houver briefing: use a `/caravela-edicao`. Ela manda o roteiro do áudio de briefing, transcreve, salva no
+Caravela Edit e dá a largada. Se ele preferir não mandar áudio nem usar a página, faça a pergunta de abertura abaixo.
 
 **Nenhuma etapa além da decupagem é automática.** Sem briefing, em toda edição nova, pergunte primeiro (uma janela só, com
 AskUserQuestion) o que o Pedro quer desta vez:
