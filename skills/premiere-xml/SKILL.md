@@ -7,7 +7,7 @@ description: >-
   cada fala boa, ponto de ilustração e trecho a conferir da decupagem. Nada é renderizado nem
   achatado. Use quando pedirem "manda para o Premiere", "XML para o Premiere", "timeline do
   Premiere", "marcadores no Premiere", "quero editar no Premiere", "importar o corte", ou ao fim de
-  /decupagem, /video-editing-skill ou /ilustrar-fala quando a pessoa finaliza no Premiere.
+  /decupagem-falas-premiere (sem o Premiere aberto), /video-editing-skill ou /ilustrar-fala quando a pessoa finaliza no Premiere.
 ---
 
 # Premiere XML
@@ -19,7 +19,7 @@ ela abre e continua editando, em vez de um MP4 fechado.
 
 | Arquivo | De onde vem | Obrigatório |
 |---|---|---|
-| `decupagem.json` | `/decupagem` | sim: a mídia, o fps, os marcadores |
+| `decupagem.json` | `/decupagem-falas-premiere` | sim: a mídia, o fps, os marcadores |
 | `manifest.json` (`kept_spans`) | `/video-editing-skill` depois do render, ou `cortes.json` (`[[inicio, fim], ...]`) escrito por você | não: sem ele, a mídia vai inteira |
 | `insertos.json` | `/ilustrar-fala` | não |
 

@@ -5,7 +5,7 @@ description: >-
   com fundo transparente para pôr por cima no Premiere: mapa do Brasil com os estados citados
   acendendo e pino na cidade, mapa-múndi, EUA e outros países, rota entre cidades, lugar real em
   satélite, número ou contador que cresce, gráfico, linha do tempo, lista que entra item a item,
-  citação em tipografia, produto ou logo. Lê a lista "Para ilustrar" da /decupagem, gera cada motion
+  citação em tipografia, produto ou logo. Lê a lista "Para ilustrar" da /decupagem-falas-premiere, gera cada motion
   com HyperFrames, confere sobre o vídeo e entrega .mov ProRes 4444 com alfa e o insertos.json para
   o /premiere-xml. Use quando pedirem "ilustra essa fala", "anima o mapa que ela cita", "faz um
   motion para quando ele fala do número", "põe um gráfico aqui", "cria os grafismos do vídeo",
@@ -30,8 +30,8 @@ Regras:
 
 ## Passo 0: entradas
 
-- `decup/decupagem.json` e `decup/transcricao.json` (da `/decupagem`). Sem decupagem, rode a
-  `/decupagem` antes ou, para um trecho só, transcreva esse trecho.
+- `decup/decupagem.json` e `decup/transcricao.json` (da `/decupagem-falas-premiere`). Sem decupagem, rode a
+  `/decupagem-falas-premiere` antes ou, para um trecho só, transcreva esse trecho.
 - O vídeo do cliente, para ver o enquadramento e conferir o resultado.
 - A marca: se existir `brand.md`/`MOTION.md` (`/brand-intake`), use as cores e a fonte dele. Senão
   pergunte uma vez as cores e a fonte do cliente, ou use o padrão (branco, destaque `#F2A93B`,

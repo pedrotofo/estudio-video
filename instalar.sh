@@ -26,6 +26,16 @@ for d in "$AQUI"/skills/*/; do
 done
 echo "  $(ls -d "$AQUI"/skills/*/ | wc -l | tr -d ' ') skills próprias"
 
+# 1b. Skills que saíram do Estúdio (removidas.txt): apaga a cópia velha, se ainda estiver instalada
+if [ -f "$AQUI/removidas.txt" ]; then
+  tiradas=0
+  while read -r n; do
+    case "$n" in ""|\#*|*/*|.*) continue ;; esac
+    [ -d "$DESTINO/$n" ] && rm -rf "${DESTINO:?}/$n" && tiradas=$((tiradas + 1))
+  done < "$AQUI/removidas.txt"
+  [ "$tiradas" -gt 0 ] && echo "  $tiradas skills antigas tiradas (removidas.txt)"
+fi
+
 # 2. Skills de terceiros, cada uma no commit conferido (terceiros.txt: repo commit pasta...)
 #    pasta "." = o repositório inteiro é a skill (instalada com o nome do repositório);
 #    pasta "origem:nome" = instala a pasta com outro nome.
@@ -69,7 +79,7 @@ if [ -n "$PY" ]; then
     || "$PY" -m pip install -q --break-system-packages $PKGS 2>/dev/null \
     || aviso "pip falhou; rode à mão: $PY -m pip install faster-whisper 'av<16' pillow opentimelineio otio-fcp-adapter"
   "$PY" -c "import faster_whisper" 2>/dev/null && echo "  faster-whisper ok"
-  # Tempo preciso por palavra (alinhamento wav2vec2 na /decupagem): torch + torchaudio.
+  # Tempo preciso por palavra (alinhamento wav2vec2, reserva da /decupagem-falas-premiere): torch + torchaudio.
   # Sem placa NVIDIA no Linux, a versão só-CPU (bem menor). O modelo (1,2 GB) baixa no primeiro uso.
   if ! "$PY" -c "import torch, torchaudio" 2>/dev/null; then
     TORCH_IDX=""
@@ -84,6 +94,14 @@ if [ -n "$PY" ]; then
   "$PY" -c "import torch, torchaudio" 2>/dev/null && echo "  alinhamento preciso por palavra ok"
 else
   aviso "Python 3 não encontrado (a decupagem precisa dele)"
+fi
+
+# WhisperX: a transcrição principal da /decupagem-falas-premiere (tempo exato de cada palavra). Fica isolado num
+# "uv tool"; sem o uv, a skill usa o faster-whisper acima como reserva.
+if command -v uv >/dev/null; then
+  command -v whisperx >/dev/null || uv tool install -q whisperx >/dev/null 2>&1 \
+    || aviso "WhisperX não instalou; a decupagem usa o faster-whisper"
+  command -v whisperx >/dev/null && echo "  whisperx ok"
 fi
 
 HF_VERSAO="$(awk '/^hyperframes-cli/{print $2}' "$AQUI/terceiros.txt" | head -1)"

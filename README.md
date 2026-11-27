@@ -11,16 +11,18 @@ qualquer projeto, no computador ou na nuvem.
 | Skill | Faz |
 |---|---|
 | `estudio-video` | O mapa: qual skill usar em cada etapa |
-| `decupagem` | Transcreve local e de graça (faster-whisper), com timecode por palavra; marca as melhores falas, o que conferir e cada momento que pede ilustração |
-| `ilustrar-fala` | Motions sincronizados com a fala, com fundo transparente: mapa do Brasil por estados (malha do IBGE), cidades, rotas, números, listas, lugares reais |
-| `premiere-xml` | Leva o corte, os motions e os marcadores da decupagem para o Premiere como timeline editável |
+| `decupagem-falas-premiere` | **A decupagem.** Dentro do Premiere (MCP): transcreve com WhisperX, escolhe o melhor take de cada fala (com emendas), tira contagem e silêncios, mostra o roteiro decupado para aprovação e monta as sequências "Limpa" e "Alternativas". No fim, lista o que ilustrar e gera a transcrição, a legenda de uma linha e o `decupagem.json` |
 | `balance-de-cor` | **Versão de teste.** Balance de cor de uma edição no Premiere, como um colorista: mede cada corte, iguala exposição e branco (no log, antes da conversão Rec.709), cria uma LUT própria por corte e confere antes/depois exportado do Premiere. Hoje: Sony S-Log3 + drone |
+| `zooms-premiere` | Zooms no rosto direto no Premiere: estilo dinâmico (o aprovado no vídeo do luxo do Ivens) ou calmo (o da Diamantes), com backup e um comando para tirar |
+| `ilustrar-fala` | Motions sincronizados com a fala, com fundo transparente: mapa do Brasil por estados (malha do IBGE), cidades, rotas, números, listas, lugares reais |
+| `premiere-xml` | Sem o Premiere aberto: leva o corte, os motions e os marcadores de um arquivo único para o Premiere como timeline editável |
 
 **Motion (pacote que já existia, agora aqui)**: `brand-intake`, `motion-effects`,
 `animated-chart`, `title-sequence-3d`, `vox-explainer`, `launch-video`, `apple-launch-film`,
 `milestone-reveal`, `interface-escura-3d`, `newsletter-promo`, `loop-cover`, `model-showdown`,
-`reel-export`, `motion-brief-writer`, `reference-to-motion`, `blender-film`, `blender-car-film`,
-`blender-forest`.
+`reel-export`, `motion-brief-writer`, `reference-to-motion`.
+
+Skills que saíram ficam em `removidas.txt`: o `instalar.sh` apaga a cópia velha delas do computador.
 
 **De terceiros** (`terceiros.txt`, cada uma presa a um commit conferido):
 - HyperFrames: `hyperframes`, `hyperframes-cli`, `hyperframes-registry`, `media-use`, e as regras

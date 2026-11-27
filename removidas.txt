@@ -1,0 +1,31 @@
+# Skills que saíram do Estúdio. O instalar.sh apaga estas pastas de ~/.claude/skills, para uma versão velha
+# não continuar aparecendo depois que a skill sai do repositório. Uma por linha.
+
+# 27/11/2026: juntada na decupagem-falas-premiere (a única decupagem agora)
+decupagem
+# 27/11/2026: o Pedro não usa o Blender
+blender-film
+blender-car-film
+blender-forest
+# saiu antes (o HyperFrames é o motor de motion daqui)
+remotion-best-practices
+remotion-captions
+remotion-create
+remotion-docs
+remotion-interactivity
+remotion-maps
+remotion-markup
+remotion-multimedia
+remotion-render
+remotion-saas
+remotion-studio
+remotion-upgrade
+# versões antigas do HyperFrames (out/2026), substituídas pela skill hyperframes atual
+hyperframes-animation
+hyperframes-audio
+hyperframes-core
+hyperframes-creative
+hyperframes-keyframes
+hyperframes-studio
+motion-graphics
+talking-head-recut

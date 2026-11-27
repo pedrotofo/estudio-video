@@ -14,26 +14,46 @@ description: >-
 A pessoa filma clientes falando, edita no **Adobe Premiere Pro** e ilustra as falas com motion.
 Este é o mapa das skills. Escolha pelo pedido; não rode tudo sempre.
 
-## Do bruto ao Premiere
+## O fluxo principal: vídeo falado no Premiere
+
+É o fluxo dos vídeos do Novais, da Diamantes, do Riomar e da Maria Clara. Tudo acontece dentro do Premiere aberto,
+pelo MCP `premiere-pro`; nada mexe no bruto nem na sequência original. Antes de começar, leia o guia do cliente
+(Riomar e Diamantes têm guias aprovados: veja o CLAUDE.md da pessoa).
+
+**Nenhuma etapa além da decupagem é automática.** Em toda edição nova, pergunte primeiro (uma janela só, com
+AskUserQuestion) o que o Pedro quer desta vez:
+- **Zooms:** nenhum / dinâmico (vídeo animado, interativo, tipo Ivens) / calmo (institucional ou documental, tipo
+  Novais e Diamantes);
+- **Balanço de cor:** sim ou não;
+- **Motions ilustrando a fala:** sim ou não;
+- **Sons do Artlist:** sim ou não.
+
+Faça só o que ele marcar. **Não pergunte da versão vertical** (etapa 7): ele pede no fim, se quiser. Se a mensagem
+dele já disser o que quer, não pergunte de novo.
 
 | Etapa | Skill | Sai |
 |---|---|---|
-| 1. Decupar: transcrição com timecode, melhores falas, o que ilustrar | `/decupagem` | `decup/decupagem.md`, `.json`, `.srt` |
-| 2. Tirar silêncios, "éé", gaguejos e retakes | `/video-editing-skill` | `edited/manifest.json` (trechos mantidos) e um MP4 de prévia |
-| 2b. Edição por conversa a partir de vários brutos (montagem, cor, legenda) | `/video-use` (transcreve no ElevenLabs: veja as regras) | `edit/` com o corte e as transcrições |
-| 3. Ilustrar a fala (mapa, número, lista, lugar, citação) | `/ilustrar-fala` | `motions/*.mov` (ProRes 4444 com alfa) e `insertos.json` |
-| 4. Levar para o Premiere como timeline editável | `/premiere-xml` | `premiere/<nome>.xml` |
-| 4b. Balance de cor da edição no Premiere (exposição e branco iguais entre os cortes; versão de teste, Sony S-Log3 + drone) | `/balance-de-cor` | cópia da sequência com uma LUT própria por corte, prévia e conferência antes/depois |
-| 5. Versão vertical para Reels/TikTok | `/reel-export` | MP4 1080×1920 |
+| 1. Decupar: melhor take de cada fala, sem contagem nem silêncios, na ordem do roteiro; aprovação antes de montar | `/decupagem-falas-premiere` | sequências "Limpa" e "Alternativas", relatório, `decup/transcricao.json`, legenda de uma linha |
+| 2. Cor: igualar exposição e branco entre os cortes (S-Log3 → Rec.709) | `/balance-de-cor` | cópia da sequência com uma LUT por corte, antes/depois para aprovar |
+| 3. Câmera: zooms no rosto, dinâmico (Riomar) ou calmo (Diamantes) | `/zooms-premiere` | keyframes que dá para desligar, com backup da sequência |
+| 4. O que ilustrar e roteiro de motions com prévias (aprovação antes de produzir) | `/decupagem-falas-premiere`, passo 16 | `roteiro-motion/` e `decupagem.json` |
+| 5. Produzir os motions, sincronizados palavra por palavra, com fundo transparente | `/ilustrar-fala` (motor: `/hyperframes`; acabamento: `/motion-design`) | `motions/*.mov` numa faixa própria no Premiere |
+| 6. Sons dos motions e trilha | Artlist (`search_sfx`, `search_music`), nunca Openverse | lista com o momento de cada som |
+| 7. Versão vertical para Reels/TikTok (se o original for horizontal) | `/reel-export` | MP4 1080×1920 |
 
 Atalhos comuns:
-- "Só decupa": etapa 1.
-- "Decupa e marca no Premiere": 1 e 4 (sem cortes, só marcadores).
-- "Limpa a fala e manda para o Premiere": 1, 2 e 4.
-- "Ilustra esse trecho": 1 (só o trecho), 3, 4.
+- "Só decupa" / "o que tem nesse bruto": etapa 1 no modo "só mapear o material".
+- "Decupa e monta": etapa 1, depois as etapas que ele marcou na pergunta de abertura, parando nas aprovações.
+- "Faz uns zooms": etapa 3. "Ilustra esse trecho": 4 e 5 só no trecho.
 
-Na etapa 2, use `--plan` primeiro e mostre a lista de cortes. A pessoa finaliza no Premiere,
-então o MP4 da `video-editing-skill` é só prévia; o que vale é o `manifest.json` que vira XML.
+## Outras ferramentas de edição (fora do fluxo principal)
+
+| Quando | Skill |
+|---|---|
+| Vídeo simples de uma pessoa só, sem Premiere (YouTube, aula): tirar silêncios e "éé" e gerar um MP4 | `/video-editing-skill`, sempre com `"punch_in": 0` (o zoom automático dela é fraco e vai contra a regra da Diamantes) |
+| Segunda opinião na transcrição quando a decupagem marca muitos `[?]` | `/video-use` (ElevenLabs: envia o áudio, só com o ok da pessoa) |
+| Sem Premiere aberto ou na nuvem, um arquivo único | `/premiere-xml` leva o corte e os motions como XML |
+| Separar uma pessoa ou objeto do fundo do vídeo | `/object-separation` |
 
 ## Motion e animação
 
@@ -53,7 +73,7 @@ então o MP4 da `video-editing-skill` é só prévia; o que vale é o `manifest.
 | Gosto e acabamento do motion: timing, easing, coreografia | `/motion-design` (princípios), `/motion-doctrine` e `/cut-the-curve` (continuidade e transições do time do HyperFrames), `/seam-craft` (cortes sem flash) |
 | Escrever a animação em GSAP (o motor do HyperFrames) | `/gsap-core`, `/gsap-timeline`, `/gsap-plugins`, `/gsap-utils`, `/gsap-performance` |
 | Estética de páginas e sites (landing page do cliente, portfólio) | `/design-taste-frontend` |
-| Cena 3D realista ou filme curto no Blender | `/blender-film`, `/blender-car-film`, `/blender-forest` (precisa do Blender instalado) |
+| Motion graphic com estilo de referência (galeria, 5 perguntas, cards para aprovar) | `/claude-video` (usa o HyperFrames) |
 | Escrever o pedido de um motion | `/motion-brief-writer` (para construir aqui no Claude Code); `/reference-to-motion` (a partir de um vídeo de referência) |
 | Prompt para IA que gera vídeo (MiniMax e parecidos) | `prompts-de-motion` (está na sua conta do Claude) |
 
