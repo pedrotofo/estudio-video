@@ -4,6 +4,32 @@ Skills do Claude para quem filma clientes falando, edita no Premiere e ilustra a
 motion. Este repositório é a **fonte única**: o que está aqui é o que aparece no Claude Code em
 qualquer projeto, no computador ou na nuvem.
 
+## Começar uma edição (o passo a passo)
+
+**Uma vez, e sempre que o repositório mudar:**
+
+```bash
+cd estudio-video && git pull && bash instalar.sh
+```
+
+Use o `instalar.sh` completo, não o `--so-skills`: ele baixa o modelo do detector de rosto e o
+opencv. Depois, abra uma **sessão nova** do Claude Code para as skills e os agentes aparecerem.
+
+**A cada vídeo novo, na sua máquina, com o Premiere aberto no projeto:**
+
+| # | Você faz | O que acontece |
+|---|---|---|
+| 1 | `/caravela-edicao` e manda o áudio do briefing | transcreve no computador, monta o briefing, pergunta só o que faltou e grava `BRIEFING.md` na pasta do job |
+| 2 | `/diretor-edicao` | lê o `BRIEFING.md` e o `cliente.md`, acha a pasta de trabalho, e conduz a edição inteira |
+| 3 | responde **uma** janela de pergunta | zooms (nenhum / dinâmico / calmo), balanço de cor, motions, sons do Artlist. Só isso é feito |
+| 4 | espera nos **três portões** | o roteiro decupado, as prévias de motion e — só em mini-doc — a estrutura. Nada é montado sem o seu ok |
+| 5 | no fim, se quiser vertical | peça: `/reel-export`. Não é automático |
+
+Sem áudio de briefing, pule o passo 1 e comece no `/diretor-edicao`: ele faz as perguntas.
+
+**Para uma etapa só**, chame a skill direto: `/decupagem-falas-premiere`, `/zooms-premiere`,
+`/balance-de-cor`, `/ilustrar-fala`, `/conferidor-de-fala`, `/revisor-final`.
+
 ## O que tem
 
 **Do bruto ao Premiere (skills próprias)**

@@ -321,3 +321,37 @@ qualquer mensagem.
 - Não automatiza aprovação: o roteiro decupado continua esperando o ok do Pedro antes de montar.
 - Não manda material de cliente para fora. Transcrição local, como hoje.
 - Não resolve o passo que só o Pedro faz: limpar o áudio e a microedição dentro do take.
+
+
+---
+
+## 11. Onde paramos, e o que vem (28/11/2026)
+
+Esta sessão desenhou o time e construiu seis subagentes mais o diretor. Tudo o que foi decidido
+está na seção 0; o que foi construído, na 0b. Para continuar numa sessão nova, **leia este arquivo
+inteiro** — ele é a memória da conversa.
+
+**O que ainda não dá para fazer sem material de verdade:**
+
+1. **Rodar o time numa edição.** O Pedro topou o teste pareado — a mesma decupagem do jeito de
+   hoje e com o time, para comparar — mas não agora (decisão 15).
+2. **Medir os tokens de verdade**, pela tela do escritório (seção 9), em vez da estimativa que foi
+   tirada do plano por ser chute.
+3. **Escrever os `cliente.md`** do Riomar, da Diamantes e do Novais a partir dos guias no SSD `E:`,
+   em `D:\Jobs\_Claude\clientes\`. Hoje essas regras estão espalhadas na seção 4 da decupagem e na
+   seção 1 da `/zooms-premiere`.
+4. **Conferir o `olheiro-de-rosto` num rosto de verdade.** É o único teste que a sessão de desenho
+   não conseguiu fazer: não há rosto numa sessão na nuvem. Abrir uma tira e ver se a caixa verde
+   caiu no rosto.
+5. **Instalar a tela do escritório** e ver se ela desenha no app de desktop (seção 9).
+
+**Um conserto pendente, pequeno:** a `/decupagem-falas-premiere` aponta para
+`D:\Jobs\Maria Clara - Shopping Eusébio - Nov26`, que não existe mais no disco. Perguntar ao Pedro
+para onde foi o material do Natal e do Empresarial antes de corrigir — pode ter sido arquivado em
+outro disco, e aí o caminho certo é outro.
+
+**O que mudou no repositório nesta sessão:** `PLANO-AGENTES.md` (novo), seis arquivos em `agents/`,
+as skills `diretor-edicao`, `conferidor-de-fala`, `olheiro-de-rosto`, `estruturador` e
+`revisor-final` (novas), quatro scripts novos (`pontas.py`, `pastas.py`, `rostos.py`,
+`mapa_falas.py`, `revisar.py`), o `instalar.sh` (agentes e o modelo YuNet), o `terceiros.txt` (a
+entrada do modelo), o `.gitignore` (`*.onnx`), o `README.md` e o mapa `estudio-video`.
