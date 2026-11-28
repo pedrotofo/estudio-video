@@ -11,6 +11,7 @@ qualquer projeto, no computador ou na nuvem.
 | Skill | Faz |
 |---|---|
 | `estudio-video` | O mapa: qual skill usar em cada etapa |
+| `diretor-edicao` | **O diretor do time.** Conduz a edição inteira: lê o briefing e o `cliente.md`, pergunta as quatro escolhas uma vez, despacha os especialistas, chama o conferidor antes de montar e segura os três portões que param. É o único que conversa com o Pedro e o único que mexe no Premiere |
 | `caravela-edicao` | **A porta de entrada.** `/caravela-edicao`: manda o roteiro do áudio de briefing, transcreve o áudio no computador, monta o briefing, pergunta só o que faltou, grava o `BRIEFING.md` na pasta do job e começa a edição |
 | `decupagem-falas-premiere` | **A decupagem.** Dentro do Premiere (MCP): transcreve com WhisperX, escolhe o melhor take de cada fala (com emendas), tira contagem e silêncios, mostra o roteiro decupado para aprovação e monta as sequências "Limpa" e "Alternativas". No fim, lista o que ilustrar e gera a transcrição, a legenda de uma linha e o `decupagem.json` |
 | `conferidor-de-fala` | **O segundo par de olhos.** Recebe o corte e o som, nunca a opinião de quem escolheu os takes: mede as duas pontas de cada pedaço (fim comido, silêncio no começo, contagem colada), roda a trava contra fala inventada, ouve o corte de novo e mede o volume. Conserta o que é medida, aponta o que é escolha, escreve o laudo |

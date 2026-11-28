@@ -20,6 +20,11 @@ Este é o mapa das skills. Escolha pelo pedido; não rode tudo sempre.
 pelo MCP `premiere-pro`; nada mexe no bruto nem na sequência original. Antes de começar, leia o guia do cliente
 (Riomar e Diamantes têm guias aprovados: veja o CLAUDE.md da pessoa).
 
+**Edição inteira, do começo ao fim: `/diretor-edicao`.** Quando o trabalho passar por mais de uma etapa, ele
+conduz: lê o briefing e o `cliente.md`, faz a pergunta das quatro escolhas uma vez só, despacha os especialistas,
+chama o `conferidor-de-fala` antes de montar e segura os três portões que param (roteiro decupado, prévias de motion
+e, em mini-doc, a estrutura). Para uma etapa só, chame a skill dela direto.
+
 **Projeto novo: `/caravela-edicao`.** Quando o Pedro chamar a skill ou disser "nova edição", "projeto novo de vídeo",
 "vamos editar um vídeo novo", use a `/caravela-edicao`: ela manda o roteiro do áudio de briefing, transcreve no
 computador, pergunta só o que faltou, grava `BRIEFING.md` na pasta do job e dá a largada. Num job que já tem
