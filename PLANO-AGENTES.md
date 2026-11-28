@@ -8,6 +8,26 @@ da internet.
 
 ---
 
+## 0. Decisões travadas pelo Pedro (28/11/2026)
+
+| # | Assunto | Decisão |
+|---|---|---|
+| 1 | Onde roda | **Só na máquina dele.** Às vezes ele pede alteração pelo celular, mas na mesma sessão aberta no computador — então o time tem de sobreviver a uma mensagem que chega do celular no meio |
+| 2 | Cliente do Claude | **App de desktop** (às vezes puxa o PowerShell sozinho). Isso manda na escolha da tela, seção 9 |
+| 3 | Portões que **param e esperam** | roteiro decupado · prévias de motion · estrutura (**só** em mini-doc). Cor e render **avisam e seguem** |
+| 4 | Conferidor achou problema | **Conserta e conta.** Conserta medida objetiva (fim de fala, silêncio antes, as duas pontas da emenda); **aponta** o que é escolha (take errado) |
+| 5 | Rosto x texto discordam | **O texto ganha**, em todos os clientes. O rosto vai para o relatório |
+| 6 | Pedro manda usar um take com defeito | **Obedece e registra** no laudo. A palavra é dele |
+| 7 | Decupador em paralelo por blocos | **Não. Uma passada só.** O risco (bloco 1 não vê o bloco 4, ideia repetida escolhida duas vezes) cai justamente no caso de entrevista e mini-doc, onde a regra dele é "ideias repetidas, manter todas". O ganho seria velocidade, que não é o gargalo. Rever depois de duas edições |
+| 8 | Motions em paralelo | **Teto de 3.** Cair para 2 se ele estiver no Premiere ao mesmo tempo |
+| 9 | Estruturador | **Uma ordem, com o motivo em duas linhas.** Não três opções |
+| 10 | Revisor final | **Mede e conta.** Não encosta no áudio (o Pedro limpa) e não reprova entrega: escreve o laudo, o diretor mostra |
+| 11 | Onde vive o `cliente.md` | Na **pasta do Claude em `D:\Jobs`** (fora do git). O repositório público ganha só um modelo em branco |
+| 12 | Nomes dos agentes | Aprovados, em português |
+| 13 | Skills de terceiros | **Não instalar nenhuma.** Ler como referência e escrever as nossas em português. Duas skills disputando o mesmo pedido é risco real — ele já apagou a `/decupagem` antiga por isso. Exceção: **bibliotecas** (não skills), seção 7b |
+| 14 | A `/decupagem-falas-premiere` de 352 linhas | **Não dividir agora.** Os agentes leem as seções de que precisam. Repartir só depois de duas edições funcionando |
+| 15 | Primeiro teste comparado | Ele topa rodar a mesma decupagem duas vezes para comparar, **mas não agora** |
+
 ## 1. Por que um time, e não mais uma skill
 
 O que custou caro nas três edições não foi falta de método. O método estava escrito e certo:
@@ -173,6 +193,33 @@ Nada exige copiar código de licença fechada.
 | Conhecimento separado do executor, com o NLE como rota | [appergb/ClipSkills](https://github.com/appergb/ClipSkills) | MIT |
 | Mapas editoriais para a `/ilustrar-fala` | [iart-ai/map-animation-skills](https://github.com/kevinbadi/claude-motion-skills) | MIT |
 
+## 7b. Duas bibliotecas e um método que valem mais que skill pronta
+
+Achados da pesquisa de 28/11. Não são skills para instalar — são peças que entram nas nossas.
+
+**Rastreamento de rosto, de graça e local.** O [claude-video-effects](https://github.com/Vibha-Ramprakash/claude-video-effects)
+(MIT, com instrução de Windows/PowerShell) usa **OpenCV YuNet** (MIT) para achar o rosto e
+**MediaPipe Selfie Segmenter** (Apache 2.0) para separar a pessoa do fundo. Isso serve em três
+lugares nossos, sem API e sem mandar nada para fora:
+
+- o `olheiro-de-rosto` acha o rosto em cada quadro de take em vez de eu olhar de olho;
+- a `/zooms-premiere` tem a regra "o rosto, entre os olhos, fica parado na tela" — hoje é conta à
+  mão; com o YuNet passa a ser medida;
+- o `/ilustrar-fala` pode pôr grafismo **atrás da pessoa**, que hoje não fazemos.
+
+**Como pedir para a IA julgar.** O [SeeCut](https://github.com/YeJe-cpu/SeeCut) é licença
+não comercial, então o código está fora para nós — mas o que eles mediram é método, e método se
+usa: eles calibraram o juiz com vídeos de resposta conhecida e descobriram que **nota absoluta não
+é confiável** ("a mesma peça virou 'padrão' ou 'sem graça' só mudando o prompt"), enquanto
+**comparar dois a dois é confiável**, trocando a ordem e exigindo que o mesmo ganhe nas duas
+rodadas. Vale para o `conferidor-de-fala` e o `revisor-final`: eles **comparam duas versões**, não
+dão nota de 0 a 10.
+
+**Referência de arquitetura.** O [erduo-broll-loop-engineering](https://github.com/erduo1998-cell/erduo-broll-loop-engineering)
+(MIT, **sem manutenção**) faz B-roll a partir do SRT com Director, Creator e Reviewer em revezamento,
+rodando HyperFrames — é quase o nosso motion com revisor. Serve de leitura. Atenção: o sucessor que
+o autor indica (Agent Motion) é **licença não comercial**, e o Pedro trabalha para cliente — fica fora.
+
 ## 8. A ordem de construção
 
 1. **`conferidor-de-fala`** — o menor, usa scripts que já existem, paga na primeira edição.
@@ -227,10 +274,13 @@ Opções, todas de graça e locais:
 |---|---|---|
 | [orseni/agents-office-mod](https://github.com/orseni/agents-office-mod) | escritório pixel **acima do prompt**, no próprio terminal | mod de hooks, sem servidor e sem dependência; anima pelo que cada um está fazendo. Pede Claude Code 2.1.294+ e terminal truecolor. **A mais simples** |
 | [mathiasolofsson87/Claude-agents-office](https://github.com/mathiasolofsson87/Claude-agents-office) | painel ao lado do chat, com `/office` | um retrato por agente na mesa, com a tarefa ao vivo. Pede terminal com imagem (Kitty, Ghostty) |
-| [ailtonloures/agents-office](https://github.com/ailtonloures/agents-office) | aplicativo à parte (Electron + Phaser 3) | uma sala por projeto, sem telemetria. Mais bonito, mais peça para manter |
+| [ailtonloures/agents-office](https://github.com/ailtonloures/agents-office) | aplicativo à parte (Electron + Phaser 3) | uma sala por projeto, sem telemetria. **O plano B, e provavelmente o certo:** não depende de qual terminal o app de desktop abre |
 | [paulrobello/claude-office](https://github.com/paulrobello/claude-office) | navegador (Next.js + PixiJS + FastAPI) | tem central entre sessões. O mais pesado |
 
-Começar pelo `agents-office-mod` e trocar depois, se quiser mais. O ganho de verdade vem de ver
+**O Pedro usa o app de desktop**, que às vezes abre o PowerShell sozinho. As duas primeiras
+desenham dentro do terminal e pedem truecolor (ou Kitty/Ghostty), o que não está garantido ali.
+Então: tentar o `agents-office-mod` primeiro porque é o mais barato de testar, e se não desenhar,
+ir para o aplicativo à parte. Não prometer antes de ver na tela dele. O ganho de verdade vem de ver
 **qual portão travou** sem ler log: o `conferidor-de-fala` parado com o laudo aberto diz mais que
 qualquer mensagem.
 
