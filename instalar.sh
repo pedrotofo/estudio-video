@@ -115,6 +115,24 @@ else
   aviso "Node.js não encontrado (HyperFrames precisa do Node 22+)"
 fi
 
+# Pixel Agents (pablodelucca, MIT): extensão do VS Code que mostra cada sessão do Claude Code como um
+# bonequinho num escritório de pixel. Só lê os registros das sessões; não mexe no Claude. Só instala se
+# o VS Code existir (no Windows ele costuma ficar fora do PATH do Git Bash).
+CODE="$(command -v code || true)"
+LAD=""; [ -n "${LOCALAPPDATA:-}" ] && LAD="$(cygpath -u "$LOCALAPPDATA" 2>/dev/null || echo "$LOCALAPPDATA")"
+for c in "$LAD/Programs/Microsoft VS Code/bin/code" "/c/Program Files/Microsoft VS Code/bin/code" \
+         "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"; do
+  [ -z "$CODE" ] && [ -f "$c" ] && CODE="$c"
+done
+if [ -n "$CODE" ]; then
+  tem_pixel() { "$CODE" --list-extensions 2>/dev/null | grep -qi '^pablodelucca\.pixel-agents'; }
+  tem_pixel || "$CODE" --install-extension pablodelucca.pixel-agents >/dev/null 2>&1 \
+    || aviso "Pixel Agents não instalou; no VS Code: Extensões > procure 'Pixel Agents'"
+  tem_pixel && echo "  pixel agents ok"
+else
+  aviso "VS Code não encontrado: o Pixel Agents fica de fora (Windows: winget install Microsoft.VisualStudioCode)"
+fi
+
 command -v ffmpeg >/dev/null && echo "  ffmpeg ok" \
   || aviso "ffmpeg não encontrado: Mac 'brew install ffmpeg', Windows 'winget install ffmpeg', Linux 'apt install ffmpeg'"
 
