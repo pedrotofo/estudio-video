@@ -33,3 +33,10 @@ browser-use/video-use 43cfc566833548093455c9d4a46bd69913b7e552 .
 
 # Versão do CLI do HyperFrames que acompanha as skills acima (instalar.sh usa esta linha)
 hyperframes-cli 0.9.98
+
+# Detector de rosto YuNet (opencv_zoo; MIT, Shiqi Yu): a /olheiro-de-rosto usa para achar o rosto,
+# medir o enquadramento e o giro da câmera. Não é skill nem código: é um modelo de 232 KB que o
+# instalar.sh baixa para skills/olheiro-de-rosto/scripts/ e confere pelo sha256 abaixo. Preso pelo
+# conteúdo, não por commit: se o arquivo mudar, o instalador recusa em vez de instalar outra coisa.
+# https://media.githubusercontent.com/media/opencv/opencv_zoo/main/models/face_detection_yunet/face_detection_yunet_2023mar.onnx
+# sha256 8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4

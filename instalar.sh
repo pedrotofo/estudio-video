@@ -92,7 +92,7 @@ done < "$AQUI/terceiros.txt"
 PY="$(command -v python3 || command -v py || command -v python || true)"
 if [ -n "$PY" ]; then
   # decupagem, premiere-xml e video-use (requests, librosa, matplotlib, numpy)
-  PKGS="faster-whisper av<16 pillow opentimelineio otio-fcp-adapter requests librosa matplotlib numpy"
+  PKGS="faster-whisper av<16 pillow opentimelineio otio-fcp-adapter requests librosa matplotlib numpy opencv-python-headless"
   "$PY" -m pip install -q $PKGS 2>/dev/null \
     || "$PY" -m pip install -q --user $PKGS 2>/dev/null \
     || "$PY" -m pip install -q --break-system-packages $PKGS 2>/dev/null \
@@ -121,6 +121,37 @@ if command -v uv >/dev/null; then
   command -v whisperx >/dev/null || uv tool install -q whisperx >/dev/null 2>&1 \
     || aviso "WhisperX não instalou; a decupagem usa o faster-whisper"
   command -v whisperx >/dev/null && echo "  whisperx ok"
+fi
+
+# 3b. Modelo do detector de rosto (YuNet, do opencv_zoo; MIT, Shiqi Yu): a /olheiro-de-rosto usa para
+#     achar o rosto, medir o enquadramento e o giro da câmera. Preso pelo sha256, que é garantia melhor
+#     que um commit: se o conteúdo mudar, não instala. Sem ele a skill ainda mede luz, nitidez e névoa.
+MODELO_DIR="$DESTINO/olheiro-de-rosto/scripts"
+MODELO="$MODELO_DIR/face_detection_yunet_2023mar.onnx"
+MODELO_SHA="8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4"
+MODELO_URL="https://media.githubusercontent.com/media/opencv/opencv_zoo/main/models/face_detection_yunet/face_detection_yunet_2023mar.onnx"
+soma() {
+  if command -v sha256sum >/dev/null; then sha256sum "$1" | cut -d' ' -f1
+  elif command -v shasum >/dev/null; then shasum -a 256 "$1" | cut -d' ' -f1
+  elif [ -n "${PY:-}" ]; then "$PY" -c "import hashlib,sys;print(hashlib.sha256(open(sys.argv[1],'rb').read()).hexdigest())" "$1"
+  fi
+}
+if [ -d "$MODELO_DIR" ]; then
+  if [ "$(soma "$MODELO" 2>/dev/null)" != "$MODELO_SHA" ]; then
+    tmp="$TMP/yunet.onnx"
+    if curl -fsSL -o "$tmp" "$MODELO_URL" 2>/dev/null \
+       || { [ -n "${PY:-}" ] && "$PY" -c "import urllib.request,sys;urllib.request.urlretrieve(sys.argv[1],sys.argv[2])" "$MODELO_URL" "$tmp" 2>/dev/null; }; then
+      if [ "$(soma "$tmp")" = "$MODELO_SHA" ]; then
+        mv "$tmp" "$MODELO" && echo "  detector de rosto (YuNet) ok"
+      else
+        aviso "o modelo YuNet baixou diferente do esperado: não instalei (a /olheiro-de-rosto segue sem rosto)"
+      fi
+    else
+      aviso "não baixei o modelo YuNet (sem rede?): a /olheiro-de-rosto segue sem medir rosto"
+    fi
+  else
+    echo "  detector de rosto (YuNet) ok"
+  fi
 fi
 
 HF_VERSAO="$(awk '/^hyperframes-cli/{print $2}' "$AQUI/terceiros.txt" | head -1)"
