@@ -67,8 +67,13 @@ timeline tem a origem registrada (Artlist, arte do cliente, bruto).
 
 ## 4. Os nove
 
-Nove papéis, mas **não** nove subagentes. O critério é mecânico: *o papel precisa falar com o
-Pedro, ou pôr a mão no Premiere? Se não, é subagente.*
+Nove papéis, mas **não** nove subagentes. O critério:
+
+> **Quem decide gosto, conversa com o Pedro. Quem mede ou executa, vira subagente.**
+
+Com uma trava: todo subagente cujo trabalho envolve julgamento **propõe, nunca decide**. O
+`decupador` propõe o roteiro decupado; o `estruturador` propõe a ordem; o `olheiro-de-rosto` dá um
+voto, não a palavra final. A aprovação é sempre do Pedro, na sessão principal.
 
 | # | Agente | Lê | Entrega | Onde roda |
 |---|---|---|---|---|
@@ -78,7 +83,8 @@ Pedro, ou pôr a mão no Premiere? Se não, é subagente.*
 | 4 | **`conferidor-de-fala`** | `selection.json`, `cuts.json`, o som | `laudo.md` | subagente, depois do 2, **nunca é o 2** |
 | 5 | **`estruturador`** | a decupagem, sem roteiro | `estrutura.md` | subagente, antes de montar |
 | 6 | **`colorista`** | quadros exportados do Premiere | `plano_aplicacao.json`, antes/depois | subagente (só mede; o 8 aplica) |
-| 7 | **`motionista`** | `decupagem.json` | os `.mov` com alfa | subagentes, **um por ilustração** |
+| 7a | **`motionista`** (criação) | `decupagem.json`, o quadro real do vídeo | roteiro de motions e 4 a 6 prévias | **sessão principal** |
+| 7b | **`produtor-de-motion`** | uma ilustração já aprovada | o `.mov` com alfa | subagentes, **um por motion** |
 | 8 | **`operador-premiere`** | `cuts.json`, `plano_aplicacao.json`, zooms, os `.mov` | Limpa, Alternativas, zooms, V2, marcadores | **sessão principal, serial** |
 | 9 | **`revisor-final`** | o render | timecode, safe zone 9:16, −14 LUFS | subagente (mede; o 1 mostra) |
 
@@ -94,13 +100,27 @@ O `decupador` vira subagente apesar de ser o coração do ofício: é o maior ga
 (os 36 min de transcrição do Novais saem do contexto principal) e o portão continua de pé, porque
 ele **escreve** o `roteiro-decupado.md` e o diretor **mostra**.
 
+### Por que o motion se divide em dois (correção de 28/11)
+
+O motion é a parte menos exata da edição: é criativa, com possibilidades infinitas, e o gosto é do
+Pedro. O passo 16 da decupagem já manda fazer **4 a 6 prévias sobre o quadro real** e **esperar o
+ok** — empacotar o motion como subagente apagaria essa conversa.
+
+Então a decisão (qual motion, em que palavra entra, onde no quadro, que formato, que som) fica na
+conversa, e só a **produção de cada motion já aprovado** vai para subagentes, um por motion, em
+paralelo. O Pedro aprova seis prévias numa conversa; seis subagentes produzem os seis.
+
 ### O preço de usar subagentes (contado antes, não depois)
 
 - **Não se vê o subagente trabalhar**, só o relatório. Mitigação: o artefato em arquivo
   (`roteiro-decupado.md`, `laudo.md`) é o raciocínio, não um resumo dele.
-- **Custa mais tokens:** cada subagente relê o `cliente.md`, a parte da skill que lhe cabe e a
-  transcrição; o cache não atravessa agentes. Estimativa: **2 a 3×** os tokens de uma edição de
-  hoje, quando o time todo roda. Numa edição simples o diretor despacha menos gente.
+- **Tokens: a conta tem dois lados, e não vale estimar antes de medir.** Gasta mais porque cada
+  subagente relê o `cliente.md` e a parte da skill que lhe cabe. Gasta **menos** porque hoje a
+  transcrição inteira fica na sessão principal e é reenviada a cada mensagem até o fim do trabalho
+  — com a divisão ela fica dentro do `decupador` e sai. Numa edição longa (Novais, 36 min) pode
+  sair mais barato que hoje; numa curta, mais caro. O que de verdade multiplica custo é subagente
+  refazendo trabalho por briefing incompleto, não a quantidade de agentes. **Medir na primeira
+  edição com o time** (a tela da seção 9 mostra os tokens de cada um) em vez de chutar.
 - **Confiança falsa:** um subagente devolve a conclusão no mesmo tom confiante quando acerta e
   quando erra, e um agente a quem se entrega uma hipótese tende a devolvê-la confirmada. É por isso
   que o `conferidor-de-fala` recebe **o corte e o som**, nunca a conclusão do `decupador`.
@@ -164,6 +184,28 @@ Nada exige copiar código de licença fechada.
    existem ganhando casca de agente.
 
 Cada um entra com um teste numa edição de verdade antes do próximo.
+
+### Antes do primeiro: o instalador
+
+O `instalar.sh` só instala em `~/.claude/skills`. Agente vive em `~/.claude/agents`, e não existe
+pasta `agents/` neste repositório. Então o passo zero é criar `agents/` e acrescentar ao
+`instalar.sh` a cópia para `~/.claude/agents` (com o mesmo cuidado do `removidas.txt`: apagar a
+cópia velha de agente que saiu). Sem isso nada disso roda na máquina do Pedro.
+
+## 8b. Como melhorar as skills depois
+
+**O conhecimento fica num lugar só.** A regra do ofício continua em `skills/<nome>/SKILL.md`. O
+arquivo do agente é uma casca de poucas linhas: "carregue a skill X e siga". No
+`pro-video-editing`, o arquivo do diretor tem quatro linhas de instrução. Então **melhorar o
+ofício é editar uma SKILL.md, não sete arquivos de agente.**
+
+**O ciclo é o de hoje:** editar no repositório, `bash instalar.sh --so-skills`, testar numa sessão
+nova, commitar. Nunca na cópia em `~/.claude/skills`.
+
+**O aprendizado tem lugar marcado:** a seção "Armadilhas já resolvidas" de cada skill, com data e
+o vídeo que ensinou. A novidade é que o `laudo.md` do `conferidor-de-fala` passa a ser a
+matéria-prima: defeito que aparece em três jobs vira regra nova na skill, com a aprovação do
+Pedro.
 
 ## 9. A tela do escritório
 
