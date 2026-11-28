@@ -13,6 +13,7 @@ qualquer projeto, no computador ou na nuvem.
 | `estudio-video` | O mapa: qual skill usar em cada etapa |
 | `caravela-edicao` | **A porta de entrada.** `/caravela-edicao`: manda o roteiro do áudio de briefing, transcreve o áudio no computador, monta o briefing, pergunta só o que faltou, grava o `BRIEFING.md` na pasta do job e começa a edição |
 | `decupagem-falas-premiere` | **A decupagem.** Dentro do Premiere (MCP): transcreve com WhisperX, escolhe o melhor take de cada fala (com emendas), tira contagem e silêncios, mostra o roteiro decupado para aprovação e monta as sequências "Limpa" e "Alternativas". No fim, lista o que ilustrar e gera a transcrição, a legenda de uma linha e o `decupagem.json` |
+| `conferidor-de-fala` | **O segundo par de olhos.** Recebe o corte e o som, nunca a opinião de quem escolheu os takes: mede as duas pontas de cada pedaço (fim comido, silêncio no começo, contagem colada), roda a trava contra fala inventada, ouve o corte de novo e mede o volume. Conserta o que é medida, aponta o que é escolha, escreve o laudo |
 | `balance-de-cor` | **Versão de teste.** Balance de cor de uma edição no Premiere, como um colorista: mede cada corte, iguala exposição e branco (no log, antes da conversão Rec.709), cria uma LUT própria por corte e confere antes/depois exportado do Premiere. Hoje: Sony S-Log3 + drone |
 | `zooms-premiere` | Zooms no rosto direto no Premiere: estilo dinâmico (o aprovado no vídeo do luxo do Ivens) ou calmo (o da Diamantes), com backup e um comando para tirar |
 | `ilustrar-fala` | Motions sincronizados com a fala, com fundo transparente: mapa do Brasil por estados (malha do IBGE), cidades, rotas, números, listas, lugares reais |
@@ -22,6 +23,8 @@ qualquer projeto, no computador ou na nuvem.
 `animated-chart`, `title-sequence-3d`, `vox-explainer`, `launch-video`, `apple-launch-film`,
 `milestone-reveal`, `interface-escura-3d`, `newsletter-promo`, `loop-cover`, `model-showdown`,
 `reel-export`, `motion-brief-writer`, `reference-to-motion`.
+
+**Agentes** (`agents/`): o time de edição, instalado em `~/.claude/agents`. Cada agente é uma casca de poucas linhas que carrega uma skill daqui — o conhecimento fica na skill, nunca no agente, então melhorar o ofício é editar um arquivo e não vários. O desenho do time inteiro está em `PLANO-AGENTES.md`. Hoje: `conferidor-de-fala`.
 
 Skills que saíram ficam em `removidas.txt`: o `instalar.sh` apaga a cópia velha delas do computador.
 
@@ -52,7 +55,7 @@ cd estudio-video
 bash instalar.sh          # no Windows: rode no Git Bash
 ```
 
-Instala em `~/.claude/skills` (vale para todos os projetos) e instala faster-whisper, PyTorch
+Instala em `~/.claude/skills` e `~/.claude/agents` (vale para todos os projetos) e instala faster-whisper, PyTorch
 (tempo preciso por palavra), HyperFrames e OpenTimelineIO. Para o `video-use`, ponha sua chave do
 ElevenLabs em `~/.claude/skills/video-use/.env` (`ELEVENLABS_API_KEY=...`). Precisa de Python 3, Node.js 22+ e ffmpeg. Para atualizar depois:
 `git pull && bash instalar.sh`.

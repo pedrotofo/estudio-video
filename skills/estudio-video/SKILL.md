@@ -40,6 +40,7 @@ dele já disser o que quer, não pergunte de novo.
 | Etapa | Skill | Sai |
 |---|---|---|
 | 1. Decupar: melhor take de cada fala, sem contagem nem silêncios, na ordem do roteiro; aprovação antes de montar | `/decupagem-falas-premiere` | sequências "Limpa" e "Alternativas", relatório, `decup/transcricao.json`, legenda de uma linha |
+| 1b. Conferir o corte antes de montar: as duas pontas de cada pedaço pelo som, trava contra fala inventada, ouvir de novo | `/conferidor-de-fala` | `decup/laudo.md`: pode montar / conserte antes / pare e decida |
 | 2. Cor: igualar exposição e branco entre os cortes (S-Log3 → Rec.709) | `/balance-de-cor` | cópia da sequência com uma LUT por corte, antes/depois para aprovar |
 | 3. Câmera: zooms no rosto, dinâmico (Riomar) ou calmo (Diamantes) | `/zooms-premiere` | keyframes que dá para desligar, com backup da sequência |
 | 4. O que ilustrar e roteiro de motions com prévias (aprovação antes de produzir) | `/decupagem-falas-premiere`, passo 16 | `roteiro-motion/` e `decupagem.json` |
@@ -59,6 +60,7 @@ Atalhos comuns:
 | Vídeo simples de uma pessoa só, sem Premiere (YouTube, aula): tirar silêncios e "éé" e gerar um MP4 | `/video-editing-skill`, sempre com `"punch_in": 0` (o zoom automático dela é fraco e vai contra a regra da Diamantes) |
 | Segunda opinião na transcrição quando a decupagem marca muitos `[?]` | `/video-use` (ElevenLabs: envia o áudio, só com o ok da pessoa) |
 | Sem Premiere aberto ou na nuvem, um arquivo único | `/premiere-xml` leva o corte e os motions como XML |
+| Uma fala soou cortada, sobreposta ou com o começo comido, em qualquer etapa | `/conferidor-de-fala` |
 | Separar uma pessoa ou objeto do fundo do vídeo | `/object-separation` |
 
 ## Motion e animação

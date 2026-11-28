@@ -2,7 +2,7 @@
 # Instala o Estúdio de Vídeo: as skills deste repositório, as skills de terceiros nas versões
 # conferidas (terceiros.txt) e as ferramentas (faster-whisper, HyperFrames, OpenTimelineIO).
 #
-#   bash instalar.sh            # instala em ~/.claude/skills (vale para todos os projetos)
+#   bash instalar.sh            # instala em ~/.claude/skills e ~/.claude/agents (vale para todos os projetos)
 #   bash instalar.sh --so-skills   # só copia as skills, sem pip/npm
 #
 # Roda no Linux (sessões na nuvem do Claude Code), no Mac e no Windows (Git Bash). Pode rodar de
@@ -12,6 +12,7 @@ set -uo pipefail
 
 AQUI="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DESTINO="${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}"
+AGENTES="${CLAUDE_AGENTS_DIR:-$HOME/.claude/agents}"
 SO_SKILLS=0; [ "${1:-}" = "--so-skills" ] && SO_SKILLS=1
 TMP="$(mktemp -d)"; trap 'rm -rf "$TMP"' EXIT
 aviso() { echo "  aviso: $*" >&2; }
@@ -34,6 +35,24 @@ if [ -f "$AQUI/removidas.txt" ]; then
     [ -d "$DESTINO/$n" ] && rm -rf "${DESTINO:?}/$n" && tiradas=$((tiradas + 1))
   done < "$AQUI/removidas.txt"
   [ "$tiradas" -gt 0 ] && echo "  $tiradas skills antigas tiradas (removidas.txt)"
+fi
+
+# 1c. Agentes deste repositório (~/.claude/agents): os subagentes do time de edição. Um agente é uma
+#     casca de poucas linhas que carrega uma skill daqui; o conhecimento fica na skill, nunca no agente.
+if [ -d "$AQUI/agents" ]; then
+  mkdir -p "$AGENTES"
+  n=0
+  for f in "$AQUI"/agents/*.md; do
+    [ -e "$f" ] || continue
+    cp -f "$f" "$AGENTES/$(basename "$f")" && n=$((n + 1))
+  done
+  echo "  $n agentes -> $AGENTES"
+  # agentes que saíram: linhas "agents/<nome>" no removidas.txt (o laço de cima pula linhas com barra)
+  if [ -f "$AQUI/removidas.txt" ]; then
+    while read -r l; do
+      case "$l" in agents/*) rm -f "$AGENTES/${l#agents/}.md" ;; esac
+    done < "$AQUI/removidas.txt"
+  fi
 fi
 
 # 2. Skills de terceiros, cada uma no commit conferido (terceiros.txt: repo commit pasta...)
