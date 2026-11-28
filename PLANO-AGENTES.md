@@ -13,7 +13,7 @@ da internet.
 | # | Assunto | Decisão |
 |---|---|---|
 | 1 | Onde roda | **Só na máquina dele.** Às vezes ele pede alteração pelo celular, mas na mesma sessão aberta no computador — então o time tem de sobreviver a uma mensagem que chega do celular no meio |
-| 2 | Cliente do Claude | **App de desktop** (às vezes puxa o PowerShell sozinho). Isso manda na escolha da tela, seção 9 |
+| 2 | Cliente do Claude | **App de desktop** (às vezes puxa o PowerShell sozinho), **Claude Code 2.1.332** — acima do 2.1.294, então a tela pixel do terminal é compatível. Seção 9 |
 | 3 | Portões que **param e esperam** | roteiro decupado · prévias de motion · estrutura (**só** em mini-doc). Cor e render **avisam e seguem** |
 | 4 | Conferidor achou problema | **Conserta e conta.** Conserta medida objetiva (fim de fala, silêncio antes, as duas pontas da emenda); **aponta** o que é escolha (take errado) |
 | 5 | Rosto x texto discordam | **O texto ganha**, em todos os clientes. O rosto vai para o relatório |
@@ -22,7 +22,7 @@ da internet.
 | 8 | Motions em paralelo | **Teto de 3.** Cair para 2 se ele estiver no Premiere ao mesmo tempo |
 | 9 | Estruturador | **Uma ordem, com o motivo em duas linhas.** Não três opções |
 | 10 | Revisor final | **Mede e conta.** Não encosta no áudio (o Pedro limpa) e não reprova entrega: escreve o laudo, o diretor mostra |
-| 11 | Onde vive o `cliente.md` | Na **pasta do Claude em `D:\Jobs`** (fora do git). O repositório público ganha só um modelo em branco |
+| 11 | Onde vive o `cliente.md` | **`D:\Jobs\_Claude\clientes\<cliente>.md`** (confirmado no PC em 28/11; começa com underscore). Fora do git — o repositório público ganha só um modelo em branco. O agente ainda procura a pasta na primeira vez e grava o que achar, porque letra de disco muda |
 | 12 | Nomes dos agentes | Aprovados, em português |
 | 13 | Skills de terceiros | **Não instalar nenhuma.** Ler como referência e escrever as nossas em português. Duas skills disputando o mesmo pedido é risco real — ele já apagou a `/decupagem` antiga por isso. Exceção: **bibliotecas** (não skills), seção 7b |
 | 14 | A `/decupagem-falas-premiere` de 352 linhas | **Não dividir agora.** Os agentes leem as seções de que precisam. Repartir só depois de duas edições funcionando |
@@ -231,6 +231,15 @@ o autor indica (Agent Motion) é **licença não comercial**, e o Pedro trabalha
    existem ganhando casca de agente.
 
 Cada um entra com um teste numa edição de verdade antes do próximo.
+
+### Um conserto pequeno, de passagem
+
+A `/decupagem-falas-premiere` aponta para `D:\Jobs\Maria Clara - Shopping Eusébio - Nov26`. Essa
+pasta não está mais no disco: hoje existe `Maria Clara - Black Friday Eusébio - Nov26`. Os jobs no
+`D:\Jobs` em 28/11 são Christus (quatro), Colégio Christus - Jogo, Colorista 2026-11 - testes,
+Maria Clara - Black Friday, TLF - Black Friday, Novais Arq - Edifício Tempo, Arquivos Aleatórios,
+`_Claude` e `_Premiere - Projetos Soltos`. Perguntar ao Pedro para onde foi o material antigo antes
+de corrigir o caminho na skill — não adivinhar.
 
 ### Antes do primeiro: o instalador
 
