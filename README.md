@@ -18,6 +18,7 @@ qualquer projeto, no computador ou na nuvem.
 | `balance-de-cor` | **Versão de teste.** Balance de cor de uma edição no Premiere, como um colorista: mede cada corte, iguala exposição e branco (no log, antes da conversão Rec.709), cria uma LUT própria por corte e confere antes/depois exportado do Premiere. Hoje: Sony S-Log3 + drone |
 | `olheiro-de-rosto` | **O voto do rosto.** Mede enquadramento, mira, giro da câmera, foco, luz e a névoa do teleprompter em cada take candidato, e monta tiras de quadros para a expressão ser julgada olhando. Vota; quando rosto e texto discordam, o texto ganha |
 | `zooms-premiere` | Zooms no rosto direto no Premiere: estilo dinâmico (o aprovado no vídeo do luxo do Ivens) ou calmo (o da Diamantes), com backup e um comando para tirar |
+| `estruturador` | **A história, quando não há roteiro.** Mapeia as falas (duração, números, nomes, viradas, perguntas, ideias repetidas) e propõe uma ordem — abertura, contexto, virada, prova, fechamento — com o motivo em duas linhas. Era o que faltava para mini-documentário |
 | `ilustrar-fala` | Motions sincronizados com a fala, com fundo transparente: mapa do Brasil por estados (malha do IBGE), cidades, rotas, números, listas, lugares reais |
 | `premiere-xml` | Sem o Premiere aberto: leva o corte, os motions e os marcadores de um arquivo único para o Premiere como timeline editável |
 

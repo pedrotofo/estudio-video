@@ -54,12 +54,13 @@ Faça só o que ele marcar. Se a mensagem dele já disser, não pergunte de novo
 | Etapa | Quem faz | Portão |
 |---|---|---|
 | Decupar | `/decupagem-falas-premiere` (você, na sessão) | — |
+| **Olhar o rosto nos takes** (mais de um take da mesma fala; sempre na Diamantes) | **subagente `olheiro-de-rosto`** | voto; o texto ganha se discordarem |
 | **Conferir o corte** | **subagente `conferidor-de-fala`** | laudo: pode montar / conserte / pare |
 | Mostrar o roteiro decupado | você | **PARA e espera o ok** |
 | Montar a Limpa e as Alternativas | você, no Premiere | — |
 | Cor | `/balance-de-cor` | avisa e segue |
 | Zooms | `/zooms-premiere`, no estilo escolhido | avisa e segue |
-| Estrutura (**só** mini-doc sem roteiro) | você, por enquanto | **PARA e espera o ok** |
+| Estrutura (**só** mini-doc sem roteiro) | **subagente `estruturador`** | **PARA e espera o ok** |
 | Roteiro de motions e 4 a 6 prévias | você, com o Pedro | **PARA e espera o ok** |
 | Produzir os motions aprovados | `/ilustrar-fala`, **até 3 por vez** | — |
 | Sons | Artlist (`search_sfx`, `search_music`) | avisa e segue |
@@ -106,10 +107,15 @@ máquina — o Premiere é dele, e pode estar com outro projeto aberto.
 
 ## Quem existe hoje
 
-Do time do `PLANO-AGENTES.md`, só o **`conferidor-de-fala`** está construído. O resto das etapas
-você faz na sessão, chamando as skills da tabela. Isso é normal e não atrapalha: o time entra um de
-cada vez, cada um testado numa edição de verdade antes do próximo. Quando um agente novo aparecer
-em `~/.claude/agents`, passe a despachá-lo em vez de fazer na mão.
+Construídos: **`conferidor-de-fala`**, **`olheiro-de-rosto`** e **`estruturador`**. Faltam o
+colorista, o produtor de motion e o revisor final — essas etapas você faz na sessão, chamando as
+skills da tabela. Isso é normal: o time entra um de cada vez, cada um testado numa edição de
+verdade antes do próximo. Quando um agente novo aparecer em `~/.claude/agents`, passe a
+despachá-lo em vez de fazer na mão.
+
+**Despache em paralelo o que não depende um do outro.** O `olheiro-de-rosto` e a leitura da
+transcrição andam juntos; o `conferidor-de-fala` só entra depois do `cuts.json`. Nunca mais de
+**3 subagentes ao mesmo tempo**, e caia para 2 se o Pedro estiver no Premiere.
 
 ## O que você nunca faz
 
