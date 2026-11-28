@@ -28,6 +28,27 @@ da internet.
 | 14 | A `/decupagem-falas-premiere` de 352 linhas | **Não dividir agora.** Os agentes leem as seções de que precisam. Repartir só depois de duas edições funcionando |
 | 15 | Primeiro teste comparado | Ele topa rodar a mesma decupagem duas vezes para comparar, **mas não agora** |
 
+## 0b. O que já está construído (28/11/2026)
+
+| Papel | Onde | Estado |
+|---|---|---|
+| `diretor-edicao` | sessão principal | **feito** — skill, sem arquivo de agente, de propósito |
+| `operador-premiere` | sessão principal | é o diretor; não vira agente |
+| motion, parte criativa | sessão principal | é o diretor, com as prévias e o ok |
+| `conferidor-de-fala` | subagente | **feito** — com o `pontas.py` novo |
+| `olheiro-de-rosto` | subagente | **feito** — com o YuNet (MIT) |
+| `estruturador` | subagente | **feito** — com o `mapa_falas.py` novo |
+| `colorista` | subagente | **feito** — veste a `/balance-de-cor`, só medir |
+| `produtor-de-motion` | subagente | **feito** — veste a `/ilustrar-fala`, um por motion |
+| `revisor-final` | subagente | **feito** — com o `revisar.py` novo |
+| `decupador` | **continua na sessão** | pela decisão 14: a decupagem tem 352 linhas, funciona, e repartir é a parte mais perigosa. Rever depois de duas edições com o time |
+
+O `colorista` e o `produtor-de-motion` não ganharam skill própria: vestem skills que já existem.
+É o princípio da seção 8b — o conhecimento mora num lugar só, e o agente é casca.
+
+Falta o que depende de material de verdade: testar os seis numa edição, medir os tokens de cada um
+pela tela do escritório, e escrever os `cliente.md` do Riomar, da Diamantes e do Novais.
+
 ## 1. Por que um time, e não mais uma skill
 
 O que custou caro nas três edições não foi falta de método. O método estava escrito e certo:

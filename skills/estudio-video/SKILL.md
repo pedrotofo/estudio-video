@@ -64,6 +64,7 @@ Atalhos comuns:
 |---|---|
 | Vídeo simples de uma pessoa só, sem Premiere (YouTube, aula): tirar silêncios e "éé" e gerar um MP4 | `/video-editing-skill`, sempre com `"punch_in": 0` (o zoom automático dela é fraco e vai contra a regra da Diamantes) |
 | Segunda opinião na transcrição quando a decupagem marca muitos `[?]` | `/video-use` (ElevenLabs: envia o áudio, só com o ok da pessoa) |
+| Conferir um export antes de entregar ou subir (formato, volume, área segura) | `/revisor-final` |
 | Sem Premiere aberto ou na nuvem, um arquivo único | `/premiere-xml` leva o corte e os motions como XML |
 | Mini-documentário ou institucional **sem roteiro**: em que ordem contar | `/estruturador` |
 | Mais de um take da mesma fala, ou dúvida de expressão, foco e enquadramento | `/olheiro-de-rosto` |

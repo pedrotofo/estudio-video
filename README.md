@@ -20,6 +20,7 @@ qualquer projeto, no computador ou na nuvem.
 | `zooms-premiere` | Zooms no rosto direto no Premiere: estilo dinâmico (o aprovado no vídeo do luxo do Ivens) ou calmo (o da Diamantes), com backup e um comando para tirar |
 | `estruturador` | **A história, quando não há roteiro.** Mapeia as falas (duração, números, nomes, viradas, perguntas, ideias repetidas) e propõe uma ordem — abertura, contexto, virada, prova, fechamento — com o motivo em duas linhas. Era o que faltava para mini-documentário |
 | `ilustrar-fala` | Motions sincronizados com a fala, com fundo transparente: mapa do Brasil por estados (malha do IBGE), cidades, rotas, números, listas, lugares reais |
+| `revisor-final` | **O último par de olhos.** Antes de entregar ou subir: formato (codec, tamanho, pixel format, faixa de cor, áudio), volume em LUFS e pico, e a área segura do vertical desenhada numa tira de quadros. Mede e conta — não mexe no áudio e não reprova entrega |
 | `premiere-xml` | Sem o Premiere aberto: leva o corte, os motions e os marcadores de um arquivo único para o Premiere como timeline editável |
 
 **Motion (pacote que já existia, agora aqui)**: `brand-intake`, `motion-effects`,
@@ -27,7 +28,7 @@ qualquer projeto, no computador ou na nuvem.
 `milestone-reveal`, `interface-escura-3d`, `newsletter-promo`, `loop-cover`, `model-showdown`,
 `reel-export`, `motion-brief-writer`, `reference-to-motion`.
 
-**Agentes** (`agents/`): o time de edição, instalado em `~/.claude/agents`. Cada agente é uma casca de poucas linhas que carrega uma skill daqui — o conhecimento fica na skill, nunca no agente, então melhorar o ofício é editar um arquivo e não vários. O desenho do time inteiro está em `PLANO-AGENTES.md`. Hoje: `conferidor-de-fala`.
+**Agentes** (`agents/`): o time de edição, instalado em `~/.claude/agents`. Cada agente é uma casca de poucas linhas que carrega uma skill daqui — o conhecimento fica na skill, nunca no agente, então melhorar o ofício é editar um arquivo e não vários. O desenho do time inteiro está em `PLANO-AGENTES.md`. Hoje: `conferidor-de-fala`, `olheiro-de-rosto`, `estruturador`, `colorista`, `produtor-de-motion` e `revisor-final`. O `colorista` e o `produtor-de-motion` não têm skill própria: vestem a `/balance-de-cor` e a `/ilustrar-fala`, fazendo só a parte que não precisa do Premiere nem do Pedro.
 
 Skills que saíram ficam em `removidas.txt`: o `instalar.sh` apaga a cópia velha delas do computador.
 

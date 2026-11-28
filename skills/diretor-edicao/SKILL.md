@@ -58,13 +58,14 @@ Faça só o que ele marcar. Se a mensagem dele já disser, não pergunte de novo
 | **Conferir o corte** | **subagente `conferidor-de-fala`** | laudo: pode montar / conserte / pare |
 | Mostrar o roteiro decupado | você | **PARA e espera o ok** |
 | Montar a Limpa e as Alternativas | você, no Premiere | — |
-| Cor | `/balance-de-cor` | avisa e segue |
+| Cor: medir e propor | **subagente `colorista`** | avisa e segue |
+| Cor: aplicar no Premiere | você (o colorista não tem as ferramentas) | — |
 | Zooms | `/zooms-premiere`, no estilo escolhido | avisa e segue |
 | Estrutura (**só** mini-doc sem roteiro) | **subagente `estruturador`** | **PARA e espera o ok** |
 | Roteiro de motions e 4 a 6 prévias | você, com o Pedro | **PARA e espera o ok** |
-| Produzir os motions aprovados | `/ilustrar-fala`, **até 3 por vez** | — |
+| Produzir os motions aprovados | **subagentes `produtor-de-motion`**, um por motion, **até 3 por vez** | — |
 | Sons | Artlist (`search_sfx`, `search_music`) | avisa e segue |
-| Render e revisão final | você | avisa e segue |
+| Render e revisão final | **subagente `revisor-final`** | avisa e segue |
 | Vertical | `/reel-export` | só se ele pedir |
 
 **Param e esperam: o roteiro decupado, as prévias de motion e — só em mini-doc — a estrutura.** Cor
@@ -107,11 +108,12 @@ máquina — o Premiere é dele, e pode estar com outro projeto aberto.
 
 ## Quem existe hoje
 
-Construídos: **`conferidor-de-fala`**, **`olheiro-de-rosto`** e **`estruturador`**. Faltam o
-colorista, o produtor de motion e o revisor final — essas etapas você faz na sessão, chamando as
-skills da tabela. Isso é normal: o time entra um de cada vez, cada um testado numa edição de
-verdade antes do próximo. Quando um agente novo aparecer em `~/.claude/agents`, passe a
-despachá-lo em vez de fazer na mão.
+Seis subagentes construídos: **`conferidor-de-fala`**, **`olheiro-de-rosto`**, **`estruturador`**,
+**`colorista`**, **`produtor-de-motion`** e **`revisor-final`**.
+
+**A decupagem continua na sessão, com você.** É decisão do Pedro (28/11/2026): a
+`/decupagem-falas-premiere` tem 352 linhas, funciona, e repartir é a parte mais perigosa de tudo
+isso. Só depois de duas edições com o time é que se pensa em tirá-la daqui.
 
 **Despache em paralelo o que não depende um do outro.** O `olheiro-de-rosto` e a leitura da
 transcrição andam juntos; o `conferidor-de-fala` só entra depois do `cuts.json`. Nunca mais de
