@@ -237,8 +237,9 @@ Cada um entra com um teste numa edição de verdade antes do próximo.
 A `/decupagem-falas-premiere` aponta para `D:\Jobs\Maria Clara - Shopping Eusébio - Nov26`. Essa
 pasta não está mais no disco: hoje existe `Maria Clara - Black Friday Eusébio - Nov26`. Os jobs no
 `D:\Jobs` em 28/11 são Christus (quatro), Colégio Christus - Jogo, Colorista 2026-11 - testes,
-Maria Clara - Black Friday, TLF - Black Friday, Novais Arq - Edifício Tempo, Arquivos Aleatórios,
-`_Claude` e `_Premiere - Projetos Soltos`. Perguntar ao Pedro para onde foi o material antigo antes
+Maria Clara - Black Friday, TLF - Black Friday, Arquivos Aleatórios, `_Claude` e
+`_Premiere - Projetos Soltos` — onze ao todo. **O Novais não está no `D:\Jobs`**: o job do
+Edifício Tempo mora em outro lugar, e o plano não deve supor que todo job do Estúdio vive ali. Perguntar ao Pedro para onde foi o material antigo antes
 de corrigir o caminho na skill — não adivinhar.
 
 ### Antes do primeiro: o instalador
