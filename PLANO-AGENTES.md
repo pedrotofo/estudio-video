@@ -34,6 +34,9 @@ Então a regra do time é:
 
 > Todos analisam **arquivos** em paralelo. **Um só** põe a mão no Premiere.
 
+E essa regra não fica no texto: os subagentes nascem com `tools:` no cabeçalho **sem** o MCP
+`premiere-pro`. Não é "não faça" — é não poder.
+
 ## 3. Os contratos
 
 Cada agente lê e escreve arquivo, nunca o Premiere nem a cabeça do outro. Quase todos já
@@ -64,17 +67,45 @@ timeline tem a origem registrada (Artlist, arte do cliente, bruto).
 
 ## 4. Os nove
 
-| # | Agente | Lê | Entrega | Roda |
+Nove papéis, mas **não** nove subagentes. O critério é mecânico: *o papel precisa falar com o
+Pedro, ou pôr a mão no Premiere? Se não, é subagente.*
+
+| # | Agente | Lê | Entrega | Onde roda |
 |---|---|---|---|---|
-| 1 | **`diretor-edicao`** | `BRIEFING.md`, `cliente.md` | despacha, confere cada portão, junta tudo no fim | sozinho, do começo ao fim |
-| 2 | **`decupador`** | `transcricao.json`, `all.txt`, `find_gaps`, `rostos.json` | `selection.json`, `selection_alt.json` | **em paralelo por bloco de falas** |
-| 3 | **`olheiro-de-rosto`** | quadros de cada take candidato | `rostos.json` | em paralelo com o 2 |
-| 4 | **`conferidor-de-fala`** | `selection.json`, `cuts.json`, o som | `laudo.md` | depois do 2, **nunca é o 2** |
-| 5 | **`estruturador`** | a decupagem, sem roteiro | `estrutura.md` | antes de montar |
-| 6 | **`colorista`** | quadros exportados do Premiere | plano de LUT por corte, antes/depois | em paralelo |
-| 7 | **`motionista`** | `decupagem.json` | **um subagente por ilustração**, cada um na sua pasta | paralelo de verdade |
-| 8 | **`operador-premiere`** | `cuts.json`, zooms, os `.mov` | Limpa, Alternativas, zooms, V2, marcadores | **serial, sozinho** |
-| 9 | **`revisor-final`** | o render | timecode, safe zone 9:16, −14 LUFS, relatório | no fim |
+| 1 | **`diretor-edicao`** | `BRIEFING.md`, `cliente.md` | despacha, confere cada portão, junta tudo no fim | **sessão principal** |
+| 2 | **`decupador`** | `transcricao.json`, `all.txt`, `find_gaps`, `rostos.json` | `selection.json`, `selection_alt.json`, `roteiro-decupado.md` | subagente, **em paralelo por bloco de falas** |
+| 3 | **`olheiro-de-rosto`** | quadros de cada take candidato | `rostos.json` | subagente, em paralelo com o 2 |
+| 4 | **`conferidor-de-fala`** | `selection.json`, `cuts.json`, o som | `laudo.md` | subagente, depois do 2, **nunca é o 2** |
+| 5 | **`estruturador`** | a decupagem, sem roteiro | `estrutura.md` | subagente, antes de montar |
+| 6 | **`colorista`** | quadros exportados do Premiere | `plano_aplicacao.json`, antes/depois | subagente (só mede; o 8 aplica) |
+| 7 | **`motionista`** | `decupagem.json` | os `.mov` com alfa | subagentes, **um por ilustração** |
+| 8 | **`operador-premiere`** | `cuts.json`, `plano_aplicacao.json`, zooms, os `.mov` | Limpa, Alternativas, zooms, V2, marcadores | **sessão principal, serial** |
+| 9 | **`revisor-final`** | o render | timecode, safe zone 9:16, −14 LUFS | subagente (mede; o 1 mostra) |
+
+### Por que o diretor e o operador não são subagentes
+
+**Subagente não fala com o Pedro.** Não usa `AskUserQuestion`, não mostra o roteiro decupado para
+aprovação, não para no meio para perguntar qual sequência é. Um diretor-subagente não consegue
+fazer a pergunta das quatro escolhas, e o portão de aprovação do roteiro decupado — a regra mais
+importante do Estúdio — cairia. O operador fica na sessão principal porque a conexão com o Premiere
+é dele e porque é ali que a aprovação acontece.
+
+O `decupador` vira subagente apesar de ser o coração do ofício: é o maior ganho de cabeça livre
+(os 36 min de transcrição do Novais saem do contexto principal) e o portão continua de pé, porque
+ele **escreve** o `roteiro-decupado.md` e o diretor **mostra**.
+
+### O preço de usar subagentes (contado antes, não depois)
+
+- **Não se vê o subagente trabalhar**, só o relatório. Mitigação: o artefato em arquivo
+  (`roteiro-decupado.md`, `laudo.md`) é o raciocínio, não um resumo dele.
+- **Custa mais tokens:** cada subagente relê o `cliente.md`, a parte da skill que lhe cabe e a
+  transcrição; o cache não atravessa agentes. Estimativa: **2 a 3×** os tokens de uma edição de
+  hoje, quando o time todo roda. Numa edição simples o diretor despacha menos gente.
+- **Confiança falsa:** um subagente devolve a conclusão no mesmo tom confiante quando acerta e
+  quando erra, e um agente a quem se entrega uma hipótese tende a devolvê-la confirmada. É por isso
+  que o `conferidor-de-fala` recebe **o corte e o som**, nunca a conclusão do `decupador`.
+- **Erro no briefing se multiplica por sete** em vez de aparecer na primeira pergunta. O
+  `BRIEFING.md` e o `cliente.md` têm de estar completos antes do diretor despachar.
 
 ### Os três que hoje não existem
 
@@ -136,14 +167,17 @@ Cada um entra com um teste numa edição de verdade antes do próximo.
 
 ## 9. A tela do escritório
 
-O Pedro quer, no fim, a tela pixel com os agentes trabalhando. Isso tem uma consequência de
-desenho que precisa valer desde o primeiro agente:
+O Pedro quer, no fim, a tela pixel com os agentes trabalhando.
 
-> **Essas telas mostram subagentes, não skills.** Uma skill é invisível para elas. Os nove têm de
-> ser agentes de verdade, em `.claude/agents/`, despachados pelo diretor — não nove seções de uma
-> skill grande.
+Essas telas mostram **o orquestrador e os subagentes que ele despacha** — o diretor aparece na
+mesa dele mesmo rodando na sessão principal, e cada subagente ganha um card enquanto trabalha. O
+que elas não mostram é skill: uma skill que ninguém despachou é invisível. Com o desenho da seção
+4 a tela tem sete cards de trabalho mais o diretor, o que é gente de sobra para a sala.
 
-É mais uma razão para o desenho acima, além da cabeça livre: o trabalho fica visível.
+**Custo em tokens: praticamente zero.** É um mod de hooks — código que roda no computador do Pedro
+quando uma ferramenta é chamada, e desenha no terminal. O desenho não entra na conversa do modelo.
+O card do `agents-office-mod` até mostra quantos tokens cada subagente gastou: ele **lê** esse
+número de fora. Quem gasta é o time (seção 4), não a tela.
 
 Opções, todas de graça e locais:
 
